@@ -1,0 +1,89 @@
+/*
+	Copyright (C) 2015 Krzysztof Grochocki
+
+	This file is part of Ejabberd Account Tools.
+
+	Ejabberd Account Tools is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 3, or
+	(at your option) any later version.
+
+	Ejabberd Account Tools is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with GNU Radio. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/* Inputs style */
+#ejabat_register input[type="text"], #ejabat_register input[type="password"], #ejabat_register input[type="email"]{
+max-width:302px;
+width:100%;
+}
+/* Invalid input */
+input.invalid{
+border:1px solid #f00 !important;
+}
+div.invalid{
+border:1px solid #f00 !important;
+display:inline-block;
+margin:-1px;
+}
+/* Tip */
+.tip{
+font-size:1em;
+display:block;
+margin-left:4px;
+}
+.tip:not(:empty){
+margin-bottom:-1.5em;
+}
+.recaptcha.tip:not(:empty){
+position:inherit;
+margin:-5px 4px 0;
+}
+.tip.invalid{
+color:#f00;
+}
+/* Password strength */
+input.very-weak{
+background:linear-gradient(90deg, #FFA0A0 25%, #FFF 25%) !important;
+border-color:#F04040 !important
+}
+input.weak{
+background:linear-gradient(90deg, #FFB78C 50%, #FFF 50%) !important;
+border-color:#FF853C !important;
+}
+input.good{
+background:linear-gradient(90deg, #FFEC8B 75%, #FFF 75%) !important;
+}
+input.strong{
+background-color: #C3FF88 !important;
+}
+/* Spinner */
+#spinner{
+margin-left:4px;
+font-size:14px;
+}
+/* Response */
+#response{
+margin:1.5em 0.5em 0.5em;
+padding:0.2em 1em;
+}
+div.ejabat-register-success {
+border:2px solid #398f14;
+}
+div.ejabat-register-error {
+border:2px solid #ff0000;
+}
+div.ejabat-register-blocked {
+border:2px solid #ffa500;
+}
+div.ejabat-validation-errors {
+border:2px solid #f7e700;
+}
+div.ejabat-display-none{
+display:none;
+}

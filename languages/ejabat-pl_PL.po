@@ -1,0 +1,235 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Ejabberd Account Tools\n"
+"POT-Creation-Date: 2015-06-06 13:50+0100\n"
+"PO-Revision-Date: 2015-06-06 16:12+0100\n"
+"Last-Translator: Krzysztof Grochocki <kontakt@beherit.pl>\n"
+"Language-Team: Krzysztof Grochocki <kontakt@beherit.pl>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-Basepath: ..\\\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ejabat_admin.php:42
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: ejabat_admin.php:51 ejabat_admin.php:208
+msgid "Ejabberd Account Tools"
+msgstr "Ejabberd Account Tools"
+
+#: ejabat_admin.php:91
+msgid "REST API"
+msgstr "REST API"
+
+#: ejabat_admin.php:100
+msgid "Registration"
+msgstr "Rejestracja"
+
+#: ejabat_admin.php:109
+msgid "Donations"
+msgstr "Wsparcie"
+
+#: ejabat_admin.php:118
+msgid "Usage information"
+msgstr "Informacje o użytkowaniu"
+
+#: ejabat_admin.php:131
+msgid "REST API url"
+msgstr "Adres REST API"
+
+#: ejabat_admin.php:132
+msgid "Enter URL defined in module mod_rest in ejabberd settings."
+msgstr ""
+"Wpisz adres URL zdefiniowany w module mod_rest w ustawieniach ejabberd."
+
+#: ejabat_admin.php:135
+msgid "Enable authorization"
+msgstr "Włącz autoryzację"
+
+#: ejabat_admin.php:138 ejabat_shortcodes.php:55
+msgid "Login"
+msgstr "Login"
+
+#: ejabat_admin.php:139
+msgid "Password"
+msgstr "Hasło"
+
+#: ejabat_admin.php:142
+msgid "Set last activity information"
+msgstr "Ustaw informację o ostatniej aktywności"
+
+#: ejabat_admin.php:150
+msgid "Used hostname"
+msgstr "Używana nazwa hosta"
+
+#: ejabat_admin.php:153
+msgid "Regexp for allowed login"
+msgstr "Regexp dla dozwolonego loginu"
+
+#: ejabat_admin.php:156
+msgid "Regexp for blocked login"
+msgstr "Regexp dla zablokowanego loginu"
+
+#: ejabat_admin.php:159
+msgid "Registration watcher"
+msgstr "Obserwator rejestracji"
+
+#: ejabat_admin.php:160
+msgid ""
+"Sends information about new registration to specified JID. Leave field empty "
+"if disabled."
+msgstr ""
+"Wysyła informacje o nowej rejestracji do określonego JID. Zostaw pole puste, "
+"jeśli wyłączone."
+
+#: ejabat_admin.php:163
+msgid "Registration timeout"
+msgstr "Limit czasu rejestracji"
+
+#: ejabat_admin.php:164
+msgid ""
+"Limits the frequency of registration from a given IP address. The timeout is "
+"expressed in seconds, to disable this limitation enter 0."
+msgstr ""
+"Ogranicza częstotliwość rejestracji z danego adresu IP. Limit czasu jest "
+"wyrażony w sekundach, aby wyłączyć to ograniczenie wpisz 0."
+
+#: ejabat_admin.php:171
+msgid ""
+"If you like this plugin, please send a donation to support its development "
+"and maintenance"
+msgstr ""
+"Jeśli podoba Ci się ta wtyczka, proszę prześlij darowiznę na wsparcie jej "
+"rozwoju i utrzymanie"
+
+#: ejabat_admin.php:181
+msgid ""
+"First, make sure that module mod_rest in ejabberd is properly configured. "
+"Example configuration:"
+msgstr ""
+"Po pierwsze, upewnij się, że moduł mod_rest w ejabberd jest poprawnie "
+"skonfigurowany. Przykładowa konfiguracja:"
+
+#: ejabat_admin.php:195
+msgid ""
+"Second, configure REST API url and optional authorization data. At last, "
+"place shortcode on page."
+msgstr ""
+"Po drugie, skonfiguruj adres REST API i opcjonalne dane autoryzacji. W "
+"końcu, umieścić shortcode na stronie."
+
+#: ejabat_admin.php:197
+msgid "Simple registration form with validation and recaptcha."
+msgstr "Prosty formularz rejestracji z walidacją i reCAPTCHA."
+
+#: ejabat_admin.php:216
+msgid "Save settings"
+msgstr "Zapisz zmiany"
+
+#: ejabat_shortcodes.php:31
+msgid "Login contains illegal characters or it's too short."
+msgstr "Login zawiera niedozwolone znaki lub jest zbyt krótki."
+
+#: ejabat_shortcodes.php:32
+msgid "Password is very weak."
+msgstr "Hasło jest bardzo słabe."
+
+#: ejabat_shortcodes.php:33
+msgid "Password is weak."
+msgstr "Hasło jest słabe."
+
+#: ejabat_shortcodes.php:34
+msgid "Password is good."
+msgstr "Hasło jest dobre."
+
+#: ejabat_shortcodes.php:35
+msgid "Password is strong."
+msgstr "Hasło jest silne."
+
+#: ejabat_shortcodes.php:36
+msgid "The password mismatch with the confirmation."
+msgstr "Hasło nie zgadza się z potwierdzeniem."
+
+#: ejabat_shortcodes.php:37
+msgid "Email address seems invalid."
+msgstr "Podany adres e-mail jest niepoprawny."
+
+#: ejabat_shortcodes.php:38
+msgid "Please verify the Captcha."
+msgstr "Proszę zweryfikować Captcha."
+
+#: ejabat_shortcodes.php:39
+msgid "Please fill the required field."
+msgstr "Proszę uzupełnić wymagane pole."
+
+#: ejabat_shortcodes.php:40
+msgid ""
+"Validation errors occurred. Please check all fields and submit it again."
+msgstr ""
+"Wystąpiły błędy walidacji. Proszę sprawdzić wszystkie pola i przesłać "
+"formularz ponownie."
+
+#: ejabat_shortcodes.php:59
+msgid "Password "
+msgstr "Hasło"
+
+#: ejabat_shortcodes.php:63
+msgid "Confirm password"
+msgstr "Potwierdź hasło"
+
+#: ejabat_shortcodes.php:68
+msgid "Private e-mail"
+msgstr "Prywatny e-mail"
+
+#: ejabat_shortcodes.php:76
+msgid "Register"
+msgstr "Rejestracja"
+
+#: ejabat_shortcodes.php:89
+msgid "Verification error, try again."
+msgstr "Błąd weryfikacji, spróbuj ponownie."
+
+#: ejabat_shortcodes.php:95
+msgid "All fields are required. Please check the form and submit it again."
+msgstr ""
+"Wszystkie pola są wymagane. Proszę sprawdzić formularz i przesłać go "
+"ponownie."
+
+#: ejabat_shortcodes.php:102
+msgid "Captcha validation error, try again."
+msgstr "Błąd walidacji Captcha, spróbuj ponownie."
+
+#: ejabat_shortcodes.php:109
+msgid "Selected login contains illegal words, change it and try again."
+msgstr "Wybrany login zawiera niedozwolone słowa, zmień go i spróbuj ponownie."
+
+#: ejabat_shortcodes.php:116
+msgid "You can't register another account so quickly. Please try again later."
+msgstr ""
+"Nie można zarejestrować kolejnego konta tak szybko. Proszę spróbuj ponownie "
+"później."
+
+#: ejabat_shortcodes.php:126
+msgid "Server is temporarily unavailable, please try again in a moment."
+msgstr "Serwer jest chwilowo niedostępny, spróbuj ponownie za chwilę."
+
+#: ejabat_shortcodes.php:131
+#, php-format
+msgid "Account %s has been successfully registered."
+msgstr "Konto %s zostało pomyślnie zarejestrowane."
+
+#: ejabat_shortcodes.php:152
+msgid "Selected login is already registered, change it and try again."
+msgstr "Wybrany login jest już zarejestrowany, zmień go i spróbuj ponownie."
+
+#: ejabat_shortcodes.php:157
+msgid "Unexpected error occurred, try again."
+msgstr "Wystąpił nieoczekiwany błąd, spróbuj ponownie."
