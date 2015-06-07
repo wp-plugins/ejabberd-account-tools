@@ -221,6 +221,8 @@ jQuery(document).ready(function($) {
 					//Success
 					if(response.status == 'success') {
 						$('#ejabat_register')[0].reset();
+						$('#password input').removeClass('good strong');
+						$('#password span').empty();
 					}
 					$('#response').css('display', 'inline-block');
 					$('#response').addClass('ejabat-register-'+response.status);
