@@ -103,7 +103,11 @@ function  ajax_ejabat_register_callback() {
 			else {
 				//Verify login
 				$login = $_POST['login'];
-				if(preg_match('/'.get_option('ejabat_blocked_login_regexp', '^(.*(admin|blog|bot|contact|e-mail|ejabberd|email|ftp|hostmaster|http|https|imap|info|jabber|login|mail|office|owner|pop3|postmaster|root|smtp|ssh|support|team|webmaster|xmpp).*)$').'/i', $login)) {
+				if(!preg_match('/'.get_option('ejabat_allowed_login_regexp', '^[a-z0-9_.-]{3,32}$').'/i', $login)) {
+					$status = 'blocked';
+					$message = __('Login contains illegal characters or it\'s too short.', 'ejabat');
+				}
+				else if(preg_match('/'.get_option('ejabat_blocked_login_regexp', '^(.*(admin|blog|bot|contact|e-mail|ejabberd|email|ftp|hostmaster|http|https|imap|info|jabber|login|mail|office|owner|pop3|postmaster|root|smtp|ssh|support|team|webmaster|xmpp).*)$').'/i', $login)) {
 					$status = 'blocked';
 					$message = __('Selected login contains illegal words, change it and try again.', 'ejabat');
 				}
