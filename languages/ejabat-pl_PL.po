@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ejabberd Account Tools\n"
-"POT-Creation-Date: 2015-06-08 15:12+0100\n"
-"PO-Revision-Date: 2015-06-08 15:12+0100\n"
+"POT-Creation-Date: 2015-06-08 17:52+0100\n"
+"PO-Revision-Date: 2015-06-08 17:54+0100\n"
 "Last-Translator: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language-Team: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language: pl_PL\n"
@@ -139,8 +139,7 @@ msgstr "Zapisz zmiany"
 msgid "%s Checking login..."
 msgstr "%s Sprawdzanie loginu..."
 
-#: ejabat_shortcodes.php:32 ejabat_shortcodes.php:109
-#: ejabat_shortcodes.php:182
+#: ejabat_shortcodes.php:32 ejabat_shortcodes.php:187
 msgid "Login contains illegal characters or it's too short."
 msgstr "Login zawiera niedozwolone znaki lub jest zbyt krótki."
 
@@ -161,7 +160,7 @@ msgid "Password is strong."
 msgstr "Hasło jest silne."
 
 #: ejabat_shortcodes.php:37
-msgid "The password mismatch with the confirmation."
+msgid "Password mismatch with the confirmation."
 msgstr "Hasło nie zgadza się z potwierdzeniem."
 
 #: ejabat_shortcodes.php:38
@@ -213,45 +212,57 @@ msgstr ""
 msgid "Captcha validation error, try again."
 msgstr "Błąd walidacji Captcha, spróbuj ponownie."
 
+#: ejabat_shortcodes.php:109
+msgid ""
+"Selected login contains illegal characters or it's too short, change it and "
+"try again."
+msgstr ""
+"Wybrany login zawiera niedozwolone znaki lub jest zbyt krótki, zmień go i "
+"spróbuj ponownie."
+
 #: ejabat_shortcodes.php:113
 msgid "Selected login contains illegal words, change it and try again."
 msgstr "Wybrany login zawiera niedozwolone słowa, zmień go i spróbuj ponownie."
 
 #: ejabat_shortcodes.php:120
+msgid "Email address seems invalid, change it and try again."
+msgstr "Podany adres e-mail jest niepoprawny, zmień go i spróbuj ponownie."
+
+#: ejabat_shortcodes.php:126
 msgid "You can't register another account so quickly. Please try again later."
 msgstr ""
 "Nie można zarejestrować kolejnego konta tak szybko. Proszę spróbuj ponownie "
 "później."
 
-#: ejabat_shortcodes.php:130
+#: ejabat_shortcodes.php:136
 msgid "Server is temporarily unavailable, please try again in a moment."
 msgstr "Serwer jest chwilowo niedostępny, spróbuj ponownie za chwilę."
 
-#: ejabat_shortcodes.php:135
+#: ejabat_shortcodes.php:141
 #, php-format
 msgid "Account %s has been successfully registered."
 msgstr "Konto %s zostało pomyślnie zarejestrowane."
 
-#: ejabat_shortcodes.php:156
+#: ejabat_shortcodes.php:161
 msgid "Selected login is already registered, change it and try again."
 msgstr "Wybrany login jest już zarejestrowany, zmień go i spróbuj ponownie."
 
-#: ejabat_shortcodes.php:161 ejabat_shortcodes.php:211
+#: ejabat_shortcodes.php:166 ejabat_shortcodes.php:216
 msgid "Unexpected error occurred, try again."
 msgstr "Wystąpił nieoczekiwany błąd, spróbuj ponownie."
 
-#: ejabat_shortcodes.php:186
+#: ejabat_shortcodes.php:191
 msgid "Login contains illegal words."
 msgstr "Login zawiera niedozwolone słowa."
 
-#: ejabat_shortcodes.php:196
+#: ejabat_shortcodes.php:201
 msgid "Server is temporarily unavailable."
 msgstr "Serwer jest chwilowo niedostępny."
 
-#: ejabat_shortcodes.php:201
-msgid "Selected login is available."
-msgstr "Podany login jest dostępny."
-
 #: ejabat_shortcodes.php:206
+msgid "Selected login is available."
+msgstr "Wybrany login jest dostępny."
+
+#: ejabat_shortcodes.php:211
 msgid "Selected login is already registered."
 msgstr "Wybrany login jest już zarejestrowany."

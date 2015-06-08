@@ -34,7 +34,7 @@ function ejabat_enqueue_scripts() {
 			'password_weak' => __('Password is weak.', 'ejabat'),
 			'password_good' => __('Password is good.', 'ejabat'),
 			'password_strong' => __('Password is strong.', 'ejabat'),
-			'passwords_mismatch' => __('The password mismatch with the confirmation.', 'ejabat'),
+			'passwords_mismatch' => __('Password mismatch with the confirmation.', 'ejabat'),
 			'invalid_email' => __('Email address seems invalid.', 'ejabat'),
 			'recaptcha_verify' => __('Please verify the Captcha.', 'ejabat'),
 			'empty_field' => __('Please fill the required field.', 'ejabat'),
@@ -106,59 +106,66 @@ function  ajax_ejabat_register_callback() {
 				$login = $_POST['login'];
 				if(!preg_match('/'.get_option('ejabat_allowed_login_regexp', '^[a-z0-9_.-]{3,32}$').'/i', $login)) {
 					$status = 'blocked';
-					$message = __('Login contains illegal characters or it\'s too short.', 'ejabat');
+					$message = __('Selected login contains illegal characters or it\'s too short, change it and try again.', 'ejabat');
 				}
 				else if(preg_match('/'.get_option('ejabat_blocked_login_regexp', '^(.*(admin|blog|bot|contact|e-mail|ejabberd|email|ftp|hostmaster|http|https|imap|info|jabber|login|mail|office|owner|pop3|postmaster|root|smtp|ssh|support|team|webmaster|xmpp).*)$').'/i', $login)) {
 					$status = 'blocked';
 					$message = __('Selected login contains illegal words, change it and try again.', 'ejabat');
 				}
 				else {
-					//Verify registration timeout
-					$ip = $_SERVER['REMOTE_ADDR'];
-					if(get_transient('ejabat_'.$ip)) {
+					//Verify email
+					$email = $_POST['email'];
+					if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 						$status = 'blocked';
-						$message = __('You can\'t register another account so quickly. Please try again later.', 'ejabat');
+						$message = __('Email address seems invalid, change it and try again.', 'ejabat');
 					}
-					//Try register account
 					else {
-						$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
-						$password = $_POST['password'];
-						$message = ejabat_xmpp_post_data('register '.$login.' '.$host.' '.$password);
-						//Server unavailable
-						if(is_null($message)) {
-							$status = 'error';
-							$message = __('Server is temporarily unavailable, please try again in a moment.', 'ejabat');
-						}
-						//Successfully registered
-						else if(preg_match('/^.*successfully registered.*$/i', $message)) {
-							$status = 'success';
-							$message = sprintf(__('Account %s has been successfully registered.', 'ejabat'), $login.'@'.$host);
-							//Set last activity information
-							$now = current_time('timestamp', 1);
-							ejabat_xmpp_post_data('set_last '.$login.' '.$host.' '.$now.' "Registered"');
-							//Set private email
-							$email = $_POST['email'];
-							ejabat_xmpp_post_data("private_set ".$login." ".$host." \"<private xmlns='email'>".$email."</private>\"");
-							//Send welcome message
-							//TODO
-							//Registration watcher
-							if(get_option('ejabat_watcher')) {
-								ejabat_xmpp_post_data('send_message chat '.$host.' '.get_option('ejabat_watcher').' "Registration watcher" "['.date_i18n('Y-m-d G:i:s', $now + get_option('gmt_offset') * 3600).'] The account '.$login.'@'.$host.' was registered from IP address '.$ip.' by using web registration form."');
-							}
-							//Set registration timeout
-							if(get_option('ejabat_registration_timeout', 3600)) {
-								set_transient('ejabat_'.$ip, $now, get_option('ejabat_registration_timeout', 3600));
-							}
-						}
-						//Already registered
-						else if(preg_match('/^.*already registered.*$/i', $message)) {
+						//Verify registration timeout
+						$ip = $_SERVER['REMOTE_ADDR'];
+						if(get_transient('ejabat_'.$ip)) {
 							$status = 'blocked';
-							$message = __('Selected login is already registered, change it and try again.', 'ejabat');
+							$message = __('You can\'t register another account so quickly. Please try again later.', 'ejabat');
 						}
-						//Unexpected error
+						//Try register account
 						else {
-							$status = 'error';
-							$message = __('Unexpected error occurred, try again.', 'ejabat');
+							$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
+							$password = $_POST['password'];
+							$message = ejabat_xmpp_post_data('register '.$login.' '.$host.' '.$password);
+							//Server unavailable
+							if(is_null($message)) {
+								$status = 'error';
+								$message = __('Server is temporarily unavailable, please try again in a moment.', 'ejabat');
+							}
+							//Successfully registered
+							else if(preg_match('/^.*successfully registered.*$/i', $message)) {
+								$status = 'success';
+								$message = sprintf(__('Account %s has been successfully registered.', 'ejabat'), $login.'@'.$host);
+								//Set last activity information
+								$now = current_time('timestamp', 1);
+								ejabat_xmpp_post_data('set_last '.$login.' '.$host.' '.$now.' "Registered"');
+								//Set private email
+								ejabat_xmpp_post_data("private_set ".$login." ".$host." \"<private xmlns='email'>".$email."</private>\"");
+								//Send welcome message
+								//TODO
+								//Registration watcher
+								if(get_option('ejabat_watcher')) {
+									ejabat_xmpp_post_data('send_message chat '.$host.' '.get_option('ejabat_watcher').' "Registration watcher" "['.date_i18n('Y-m-d G:i:s', $now + get_option('gmt_offset') * 3600).'] The account '.$login.'@'.$host.' was registered from IP address '.$ip.' by using web registration form."');
+								}
+								//Set registration timeout
+								if(get_option('ejabat_registration_timeout', 3600)) {
+									set_transient('ejabat_'.$ip, $now, get_option('ejabat_registration_timeout', 3600));
+								}
+							}
+							//Already registered
+							else if(preg_match('/^.*already registered.*$/i', $message)) {
+								$status = 'blocked';
+								$message = __('Selected login is already registered, change it and try again.', 'ejabat');
+							}
+							//Unexpected error
+							else {
+								$status = 'error';
+								$message = __('Unexpected error occurred, try again.', 'ejabat');
+							}
 						}
 					}
 				}
