@@ -185,6 +185,7 @@ function ejabat_usage_meta_box() { ?>
       - "::FFFF:<?php echo $_SERVER['SERVER_ADDR']; ?>"
     access_commands:
       bot:
+        - check_account
         - private_get
         - private_set
         - register

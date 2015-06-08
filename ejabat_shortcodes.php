@@ -28,6 +28,7 @@ function ejabat_enqueue_scripts() {
 		wp_localize_script('ejabat-register-valid', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),
 			'login_regexp' => get_option('ejabat_allowed_login_regexp', '^[a-z0-9_.-]{3,32}$'),
+			'checking_login' => sprintf(__('%s Checking login...', 'ejabat'), '<i class="fa fa-spinner fa-pulse"></i>'),
 			'invalid_login' => __('Login contains illegal characters or it\'s too short.', 'ejabat'),
 			'password_very_weak' => __('Password is very weak.', 'ejabat'),
 			'password_weak' => __('Password is weak.', 'ejabat'),
@@ -124,7 +125,7 @@ function  ajax_ejabat_register_callback() {
 						$password = $_POST['password'];
 						$message = ejabat_xmpp_post_data('register '.$login.' '.$host.' '.$password);
 						//Server unavailable
-						if(!$message) {
+						if(is_null($message)) {
 							$status = 'error';
 							$message = __('Server is temporarily unavailable, please try again in a moment.', 'ejabat');
 						}
@@ -170,6 +171,52 @@ function  ajax_ejabat_register_callback() {
 }
 add_action('wp_ajax_ejabat_register', 'ajax_ejabat_register_callback');
 add_action('wp_ajax_nopriv_ejabat_register', 'ajax_ejabat_register_callback');
+
+//Check if an account exists or not
+function ajax_ejabat_check_login() {
+	//Get login
+	$login = $_POST['login'];
+	//Verify login
+	if(!preg_match('/'.get_option('ejabat_allowed_login_regexp', '^[a-z0-9_.-]{3,32}$').'/i', $login)) {
+		$status = 'blocked';
+		$message = __('Login contains illegal characters or it\'s too short.', 'ejabat');
+	}
+	else if(preg_match('/'.get_option('ejabat_blocked_login_regexp', '^(.*(admin|blog|bot|contact|e-mail|ejabberd|email|ftp|hostmaster|http|https|imap|info|jabber|login|mail|office|owner|pop3|postmaster|root|smtp|ssh|support|team|webmaster|xmpp).*)$').'/i', $login)) {
+		$status = 'blocked';
+		$message = __('Login contains illegal words.', 'ejabat');
+	}
+	//Check login
+	else {
+		$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
+		$password = $_POST['password'];
+		$message = ejabat_xmpp_post_data('check_account '.$login.' '.$host);
+		//Server unavailable
+		if(is_null($message)) {
+			$status = 'error';
+			$message = __('Server is temporarily unavailable.', 'ejabat');
+		}
+		//Login available
+		else if($message=='1') {
+			$status = 'success';
+			$message = __('Selected login is available.', 'ejabat');
+		}
+		//Login already registered
+		else if($message=='0') {
+			$status = 'error';
+			$message = __('Selected login is already registered.', 'ejabat');
+		}
+		//Unexpected error
+		else {
+			$status = 'error';
+			$message = __('Unexpected error occurred, try again.', 'ejabat');
+		}
+	}
+	//Return response
+	$resp = array('status' => $status, 'message' => $message);
+	wp_send_json($resp);
+}
+add_action('wp_ajax_ejabat_check_login', 'ajax_ejabat_check_login');
+add_action('wp_ajax_nopriv_ejabat_check_login', 'ajax_ejabat_check_login');
 
 //Add shortcodes
 add_shortcode('ejabat_register', 'shortcode_ejabat_register');

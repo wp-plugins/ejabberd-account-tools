@@ -59,5 +59,5 @@ function ejabat_xmpp_post_data($data) {
 		return wp_remote_retrieve_body($response);
 	}
 	//No data
-	return '';
+	return null;
 }
