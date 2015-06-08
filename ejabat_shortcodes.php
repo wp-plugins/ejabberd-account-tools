@@ -24,7 +24,7 @@ function ejabat_enqueue_scripts() {
 	if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'ejabat_register')) {
 		wp_enqueue_style('ejabat', plugin_dir_url(__FILE__).'css/style.css', array(), EJABAT_VERSION, 'all');
 		wp_enqueue_style('fontawesome', plugin_dir_url(__FILE__).'css/font-awesome.min.css', array(), '4.3.0', 'all');
-		wp_enqueue_script('ejabat-register-valid', plugin_dir_url(__FILE__).'js/jquery.ejabat.register.validation.js', array('jquery'), EJABAT_VERSION, true);
+		wp_enqueue_script('ejabat-register-valid', plugin_dir_url(__FILE__).'js/jquery.ejabat.register.validation.min.js', array('jquery'), EJABAT_VERSION, true);
 		wp_localize_script('ejabat-register-valid', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),
 			'login_regexp' => get_option('ejabat_allowed_login_regexp', '^[a-z0-9_.-]{3,32}$'),
