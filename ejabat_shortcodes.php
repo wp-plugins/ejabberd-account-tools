@@ -53,19 +53,19 @@ function shortcode_ejabat_register() {
 	//Registration form
 	$html = '<form id="ejabat_register" method="post" novalidate="novalidate" onsubmit="return false">
 		<p id="login">
-			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'">
+			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" autocomplete="off">
 			<span class="tip"></span>
 		</p>
 		<p id="password">
-			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'"></input>
+			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'"  autocomplete="off">
 			<span class="tip"></span>
 		</p>
 		<p id="password_retyped">
-			<input type="password" name="password_retyped" placeholder="'.__('Confirm password', 'ejabat').'">
+			<input type="password" name="password_retyped" placeholder="'.__('Confirm password', 'ejabat').'"  autocomplete="off">
 			<span class="tip"></span>
 		</p>
 		<p id="email">
-			<input type="email" name="email" placeholder="'.__('Private e-mail', 'ejabat').'">
+			<input type="email" name="email" placeholder="'.__('Private e-mail', 'ejabat').'"  autocomplete="off">
 			<span class="tip"></span>
 		</p>
 		'.$recaptcha_html.'
