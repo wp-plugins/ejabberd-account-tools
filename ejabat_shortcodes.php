@@ -51,21 +51,21 @@ function shortcode_ejabat_register() {
 	//Get recaptcha
 	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Registration form
-	$html = '<form id="ejabat_register" method="post" novalidate="novalidate" onsubmit="return false">
+	$html = '<form id="ejabat_register" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
 		<p id="login">
-			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" autocomplete="off">
+			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</p>
 		<p id="password">
-			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'"  autocomplete="off">
+			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</p>
 		<p id="password_retyped">
-			<input type="password" name="password_retyped" placeholder="'.__('Confirm password', 'ejabat').'"  autocomplete="off">
+			<input type="password" name="password_retyped" placeholder="'.__('Confirm password', 'ejabat').'">
 			<span class="tip"></span>
 		</p>
 		<p id="email">
-			<input type="email" name="email" placeholder="'.__('Private e-mail', 'ejabat').'"  autocomplete="off">
+			<input type="email" name="email" placeholder="'.__('Private e-mail', 'ejabat').'">
 			<span class="tip"></span>
 		</p>
 		'.$recaptcha_html.'
