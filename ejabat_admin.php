@@ -31,16 +31,17 @@ function ejabat_register_settings() {
 	register_setting('ejabat_settings', 'ejabat_blocked_login_regexp');
 	register_setting('ejabat_settings', 'ejabat_watcher');
 	register_setting('ejabat_settings', 'ejabat_registration_timeout');
-	//Add row to plugin page
-	add_filter('plugin_row_meta', 'ejabat_plugin_row_meta', 10, 2);
+	//Add link to the settings on plugins page
+	add_filter('plugin_action_links', 'ejabat_plugin_action_links', 10, 2);
 }
 add_action('admin_init', 'ejabat_register_settings');
 
-//Settings row on plugin page
-function ejabat_plugin_row_meta($plugin_meta, $plugin_file) {
-	if(dirname(plugin_basename(__FILE__)).'/ejabat.php'==$plugin_file)
-		$plugin_meta[] = '<a href="options-general.php?page=ejabat-options">'.__('Settings', 'ejabat').'</a>';
-    return $plugin_meta;
+//Link to the settings on plugins page
+function ejabat_plugin_action_links($action_links, $plugin_file) {
+	if(dirname(plugin_basename(__FILE__)).'/ejabat.php' == $plugin_file) {
+		$action_links[] = '<a href="options-general.php?page=ejabat-options">'.__('Settings', 'ejabat').'</a>';
+	}
+    return $action_links;
 }
 
 //Create options menu
