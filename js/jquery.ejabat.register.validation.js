@@ -42,7 +42,7 @@ function validateLogin($login, $loginTip) {
 			//Check if an account exists or not
 			jQuery.ajax({
 				method: 'POST',
-				url: ejabat.ajax_url + '&action=ejabat_check_login',
+				url: ejabat.ajax_url + '&action=ejabat_register_check_login',
 				data: 'login=' + login,
 				dataType: 'json',
 				success: function(response) {

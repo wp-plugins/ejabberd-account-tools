@@ -222,8 +222,8 @@ function ajax_ejabat_register_check_login() {
 	$resp = array('status' => $status, 'message' => $message);
 	wp_send_json($resp);
 }
-add_action('wp_ajax_ejabat_check_login', 'ajax_ejabat_register_check_login');
-add_action('wp_ajax_nopriv_ejabat_check_login', 'ajax_ejabat_register_check_login');
+add_action('wp_ajax_ejabat_register_check_login', 'ajax_ejabat_register_check_login');
+add_action('wp_ajax_nopriv_ejabat_register_check_login', 'ajax_ejabat_register_check_login');
 
-//Add shortcodes
+//Add shortcode
 add_shortcode('ejabat_register', 'ejabat_register_shortcode');
