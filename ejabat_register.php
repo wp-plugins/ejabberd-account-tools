@@ -19,7 +19,7 @@
 */
 
 //Enqueue style & scripts
-function ejabat_enqueue_scripts() {
+function ejabat_enqueue_register_scripts() {
 	global $post;
 	if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'ejabat_register')) {
 		wp_enqueue_style('ejabat', plugin_dir_url(__FILE__).'css/style.css', array(), EJABAT_VERSION, 'all');
@@ -44,10 +44,10 @@ function ejabat_enqueue_scripts() {
 		wp_enqueue_script('password-strength-meter');
 	}
 }
-add_action('wp_enqueue_scripts', 'ejabat_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'ejabat_enqueue_register_scripts');
 
 //Registration form
-function shortcode_ejabat_register() {
+function ejabat_register_shortcode() {
 	//Get recaptcha
 	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Registration form
@@ -82,7 +82,7 @@ function shortcode_ejabat_register() {
 }
 
 //Registration form calback
-function  ajax_ejabat_register_callback() {
+function ajax_ejabat_register_callback() {
 	//Verify nonce
 	if(!isset($_POST['_ejabat_nonce']) || !wp_verify_nonce($_POST['_ejabat_nonce'], 'ajax_ejabat_register') || !check_ajax_referer('ajax_ejabat_register', '_ejabat_nonce', false)) {
 		$status = 'error';
@@ -180,7 +180,7 @@ add_action('wp_ajax_ejabat_register', 'ajax_ejabat_register_callback');
 add_action('wp_ajax_nopriv_ejabat_register', 'ajax_ejabat_register_callback');
 
 //Check if an account exists or not
-function ajax_ejabat_check_login() {
+function ajax_ejabat_register_check_login() {
 	//Get login
 	$login = $_POST['login'];
 	//Verify login
@@ -222,8 +222,8 @@ function ajax_ejabat_check_login() {
 	$resp = array('status' => $status, 'message' => $message);
 	wp_send_json($resp);
 }
-add_action('wp_ajax_ejabat_check_login', 'ajax_ejabat_check_login');
-add_action('wp_ajax_nopriv_ejabat_check_login', 'ajax_ejabat_check_login');
+add_action('wp_ajax_ejabat_check_login', 'ajax_ejabat_register_check_login');
+add_action('wp_ajax_nopriv_ejabat_check_login', 'ajax_ejabat_register_check_login');
 
 //Add shortcodes
-add_shortcode('ejabat_register', 'shortcode_ejabat_register');
+add_shortcode('ejabat_register', 'ejabat_register_shortcode');

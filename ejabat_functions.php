@@ -40,7 +40,7 @@ function ejabat_xmpp_post_data($data) {
 	$response = wp_remote_post($rest_url, $args);
 	$http_code = wp_remote_retrieve_response_code($response);
 	//Verify response
-	if($http_code=='200') {
+	if($http_code== 200) {
 		//Set last activity information
 		if(($auth)&&(get_option('ejabat_set_last'))) {
 			//Get current time in UTC

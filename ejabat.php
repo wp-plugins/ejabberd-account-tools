@@ -51,5 +51,5 @@ include_once dirname(__FILE__).'/ejabat_admin.php';
 //Include functions
 include_once dirname(__FILE__).'/ejabat_functions.php';
 
-//Include shortcodes
-include_once dirname(__FILE__).'/ejabat_shortcodes.php';
+//Include register shortcode
+include_once dirname(__FILE__).'/ejabat_register.php';
