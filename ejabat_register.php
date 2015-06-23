@@ -52,30 +52,30 @@ function ejabat_register_shortcode() {
 	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Create form
 	$html = '<form id="ejabat_register" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
-		<p id="login">
+		<div id="login">
 			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
-		</p>
-		<p id="password">
+		</div>
+		<div id="password">
 			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
-		</p>
-		<p id="password_retyped">
+		</div>
+		<div id="password_retyped">
 			<input type="password" name="password_retyped" placeholder="'.__('Confirm password', 'ejabat').'">
 			<span class="tip"></span>
-		</p>
-		<p id="email">
+		</div>
+		<div id="email">
 			<input type="email" name="email" placeholder="'.__('Private e-mail', 'ejabat').'">
 			<span class="tip"></span>
-		</p>
+		</div>
 		'.$recaptcha_html.'
 		<span id="recaptcha" class="recaptcha tip"></span>
-		<p>
+		<div id="submit">
 			<input type="hidden" name="action" value="ejabat_register" />
 			'.wp_nonce_field('ajax_ejabat_register', '_ejabat_nonce', true, false).'
 			<input type="submit" value="'.__('Register', 'ejabat').'" id="ejabat_register_button">
 			<i id="spinner" style="visibility: hidden;" class="fa fa-spinner fa-pulse"></i>
-		</p>
+		</div>
 		<div id="response" class="ejabat-display-none"></div>
 	</form>';
 	return $html;

@@ -17,10 +17,18 @@
 	along with GNU Radio. If not, see <http://www.gnu.org/licenses/>.
 */
 
+/* Blocks style */
+#ejabat_register #login, #ejabat_register #password, #ejabat_register #password_retyped, #ejabat_register #email,
+#ejabat_change_email #login, #ejabat_change_email #password, #ejabat_change_email #email{
+margin-bottom:1.5em;
+display:block;
+max-width:302px;
+width:100%;
+}
 /* Inputs style */
 #ejabat_register input[type="text"], #ejabat_register input[type="password"], #ejabat_register input[type="email"],
 #ejabat_change_email input[type="text"], #ejabat_change_email input[type="password"], #ejabat_change_email input[type="email"]{
-max-width:302px;
+/*max-width:302px;*/
 width:100%;
 }
 /* Invalid input */
@@ -36,7 +44,7 @@ margin:-1px;
 .tip{
 font-size:1em;
 display:block;
-margin-left:4px;
+margin:0 4px;
 }
 .tip:not(:empty){
 margin-bottom:-1.5em;
@@ -70,7 +78,7 @@ font-size:14px;
 }
 /* Response */
 #response{
-margin:1.5em 0.5em 0.5em;
+margin:1.5em 0.5em 0;
 padding:0.2em 1em;
 }
 div.ejabat-form-success {

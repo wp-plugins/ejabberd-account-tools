@@ -146,7 +146,7 @@ function ejabat_general_meta_box() { ?>
 		<li>
 			<label for="ejabat_sender_email"><?php _e('Sender email address', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_email" id="ejabat_sender_email" value="<?php echo get_option('ejabat_sender_email', 'noreply@'.preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
 			</br><label for="ejabat_sender_name"><?php _e('Sender name', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_name" id="ejabat_sender_name" value="<?php echo get_option('ejabat_sender_name', get_bloginfo()); ?>" /></label>
-			</br><small><?php _e('It will be used in all email notification, eg. when confirming new private email address.', 'ejabat'); ?></small>
+			</br><small><?php _e('It will be used in all email notification, eg. when resetting password or confirming new private email address.', 'ejabat'); ?></small>
 		</li>
 	</ul>
 <?php }
@@ -156,7 +156,7 @@ function ejabat_rest_api_meta_box() { ?>
 	<ul>
 		<li>
 			<label for="ejabat_rest_url"><?php _e('REST API url', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_rest_url" id="ejabat_rest_url" value="<?php echo get_option('ejabat_rest_url'); ?>" /></label>
-			</br><small><?php _e('Enter URL defined in module mod_rest in ejabberd settings.', 'ejabat'); ?></small>
+			</br><small><?php _e('URL defined in module mod_rest in ejabberd settings.', 'ejabat'); ?></small>
 		</li>
 		<li>
 			<label for="ejabat_auth"><input type="checkbox" id="ejabat_auth" name="ejabat_auth" value="1" <?php echo checked(1, get_option('ejabat_auth'), false ); ?> /><?php _e('Enable authorization', 'ejabat'); ?></label>
@@ -220,7 +220,7 @@ function ejabat_usage_meta_box() { ?>
     allowed_stanza_types: []</pre>
 	<p><?php _e('Second, configure REST API url and optional authorization data. At last, place shortcode on page.', 'ejabat'); ?></p>
 	<ul>
-		<li><b>[ejabat_register]</b></br><?php _e('Simple registration form with validation and recaptcha.', 'ejabat'); ?></br></li>
+		<li><b>[ejabat_register]</b></br><?php _e('Registration form with validation and reCAPTCHA.', 'ejabat'); ?></br></li>
 		<li><b>[ejabat_change_email]</b></br><?php _e('Form to change / add the private email address.', 'ejabat'); ?></br></li>
 	</ul>
 <?php }

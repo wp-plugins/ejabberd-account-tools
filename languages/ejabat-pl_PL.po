@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ejabberd Account Tools\n"
-"POT-Creation-Date: 2015-06-23 15:05+0100\n"
-"PO-Revision-Date: 2015-06-23 15:06+0100\n"
+"POT-Creation-Date: 2015-06-23 15:25+0100\n"
+"PO-Revision-Date: 2015-06-23 19:58+0100\n"
 "Last-Translator: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language-Team: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language: pl_PL\n"
@@ -63,20 +63,19 @@ msgstr "Nazwa nadawcy"
 
 #: ejabat_admin.php:149
 msgid ""
-"It will be used in all email notification, eg. when confirming new private "
-"email address."
+"It will be used in all email notification, eg. when resetting password or "
+"confirming new private email address."
 msgstr ""
-"Będzie wykorzystywane we wszystkich powiadomieniach e-mail, np. przy "
-"potwierdzaniu nowego prywatnego adresu e-mail."
+"Będzie wykorzystywane we wszystkich powiadomieniach e-mail, np. podczas "
+"resetowania hasła lub przy potwierdzaniu nowego prywatnego adresu e-mail."
 
 #: ejabat_admin.php:158
 msgid "REST API url"
 msgstr "Adres REST API"
 
 #: ejabat_admin.php:159
-msgid "Enter URL defined in module mod_rest in ejabberd settings."
-msgstr ""
-"Wpisz adres URL zdefiniowany w module mod_rest w ustawieniach ejabberd."
+msgid "URL defined in module mod_rest in ejabberd settings."
+msgstr "Adres URL zdefiniowany w module mod_rest w ustawieniach ejabberd."
 
 #: ejabat_admin.php:162
 msgid "Enable authorization"
@@ -151,8 +150,8 @@ msgstr ""
 "końcu, umieścić shortcode na stronie."
 
 #: ejabat_admin.php:223
-msgid "Simple registration form with validation and recaptcha."
-msgstr "Prosty formularz rejestracji z walidacją i reCAPTCHA."
+msgid "Registration form with validation and reCAPTCHA."
+msgstr "Formularz rejestracji z walidacją i reCAPTCHA."
 
 #: ejabat_admin.php:224
 msgid "Form to change / add the private email address."
@@ -288,7 +287,7 @@ msgstr "%s Sprawdzanie loginu..."
 
 #: ejabat_register.php:32 ejabat_register.php:189
 msgid "Login contains illegal characters or it's too short."
-msgstr "Login zawiera niedozwolone znaki lub jest zbyt krótki."
+msgstr "Login zawiera niedozwolone znaki lub jest za krótki."
 
 #: ejabat_register.php:33
 msgid "Password is very weak."
@@ -364,54 +363,3 @@ msgstr "Wybrany login jest dostępny."
 #: ejabat_register.php:213
 msgid "Selected login is already registered."
 msgstr "Wybrany login jest już zarejestrowany."
-
-#~ msgid ""
-#~ "An email has been sent to you to confirm changes. It contains a link that "
-#~ "you have to click to complete your request."
-#~ msgstr ""
-#~ "Został wysłany do Ciebie e-mail, aby potwierdzić zmiany. Zawiera link, "
-#~ "który należy, w który należy kliknąć, aby wykonać żądania."
-
-#~ msgid ""
-#~ "An email has been sent to you to confirm changes. It contains a link you "
-#~ "have to click to complete your request."
-#~ msgstr ""
-#~ "Został wysłany do Ciebie e-mail, aby potwierdzić zmiany. Zawiera link"
-
-#~ msgid ""
-#~ "Hey %s,\n"
-#~ "\n"
-#~ "You have changed the email address for your XMPP account %s. To complete "
-#~ "the change, please click on the confirmation link:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "If you haven't made this change, simply disregard this email.\n"
-#~ "\n"
-#~ "Greetings,\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Hej %s,\n"
-#~ "\n"
-#~ "You have changed the email address for your XMPP account %s. To complete "
-#~ "the change, please click on the confirmation link:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "If you haven't made this change, simply disregard this email.\n"
-#~ "\n"
-#~ "Greetings,\n"
-#~ "%s"
-
-#~ msgid "Determines XMPP vhost name, it will be used in the all forms."
-#~ msgstr "Określa nazwę vhosta XMPP, nazwa będzie używana we "
-
-#~ msgid "Used hostname"
-#~ msgstr "Używana nazwa hosta"
-
-#~ msgid ""
-#~ "The link to change your private email address has expired or is not "
-#~ "valid. Please fill the form and submit it again."
-#~ msgstr ""
-#~ "Link do zmiany twojego prywatnego adresu e-mail wygasł lub nie jest "
-#~ "poprawny. Proszę wypełnić formularz i przesłać go ponownie."

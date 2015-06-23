@@ -75,26 +75,26 @@ function ejabat_change_email_shortcode() {
 	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Create form
 	$html = '<form id="ejabat_change_email" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
-		<p id="login">
+		<div id="login">
 			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
-		</p>
-		<p id="password">
+		</div>
+		<div id="password">
 			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
-		</p>
-		<p id="email">
+		</div>
+		<div id="email">
 			<input type="email" name="email" placeholder="'.__('New private e-mail', 'ejabat').'">
 			<span class="tip"></span>
-		</p>
+		</div>
 		'.$recaptcha_html.'
 		<span id="recaptcha" class="recaptcha tip"></span>
-		<p>
+		<div id="submit">
 			<input type="hidden" name="action" value="ejabat_change_email" />
 			'.wp_nonce_field('ajax_ejabat_change_email', '_ejabat_nonce', true, false).'
 			<input type="submit" value="'.__('Change email', 'ejabat').'" id="ejabat_change_email_button">
 			<i id="spinner" style="visibility: hidden;" class="fa fa-spinner fa-pulse"></i>
-		</p>
+		</div>
 		'.$response.'
 	</form>';
 	return $html;
@@ -146,7 +146,7 @@ function ajax_ejabat_change_email_callback() {
 					//Login and password valid
 					else if($message=='0') {
 						//Set transient
-						$code = bin2hex(openssl_random_pseudo_bytes(16));
+						$code = bin2hex(openssl_random_pseudo_bytes(20));
 						$data = array('timestamp' => current_time('timestamp', 1), 'login' => $login, 'email' => $email);
 						set_transient('ejabat_'.$code, $data, get_option('ejabat_change_email_timeout', 900));
 						//Send email
