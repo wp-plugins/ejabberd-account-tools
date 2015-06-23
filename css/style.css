@@ -18,7 +18,8 @@
 */
 
 /* Inputs style */
-#ejabat_register input[type="text"], #ejabat_register input[type="password"], #ejabat_register input[type="email"]{
+#ejabat_register input[type="text"], #ejabat_register input[type="password"], #ejabat_register input[type="email"],
+#ejabat_change_email input[type="text"], #ejabat_change_email input[type="password"], #ejabat_change_email input[type="email"]{
 max-width:302px;
 width:100%;
 }
@@ -72,13 +73,13 @@ font-size:14px;
 margin:1.5em 0.5em 0.5em;
 padding:0.2em 1em;
 }
-div.ejabat-register-success {
+div.ejabat-form-success {
 border:2px solid #398f14;
 }
-div.ejabat-register-error {
+div.ejabat-form-error {
 border:2px solid #ff0000;
 }
-div.ejabat-register-blocked {
+div.ejabat-form-blocked {
 border:2px solid #ffa500;
 }
 div.ejabat-validation-errors {

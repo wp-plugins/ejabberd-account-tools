@@ -53,3 +53,6 @@ include_once dirname(__FILE__).'/ejabat_functions.php';
 
 //Include register shortcode
 include_once dirname(__FILE__).'/ejabat_register.php';
+
+//Include reset email shortcode
+include_once dirname(__FILE__).'/ejabat_change_email.php';

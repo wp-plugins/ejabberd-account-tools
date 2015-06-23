@@ -15,6 +15,10 @@ Provide ejabberd account tools such as registration form, deleting an account (w
 
 Plugin to work needs to install the [WordPress ReCaptcha Integration](https://wordpress.org/plugins/wp-recaptcha-integration/).
 
+= Translations =
+* English - default
+* Polish (pl_PL) - by the plugin author
+
 == Installation ==
 This section describes how to install the plugin and get it working.
 
@@ -25,6 +29,11 @@ This section describes how to install the plugin and get it working.
 No questions yet.
 
 == Changelog ==
+= 1.x (2015-06-xx) =
+* The ability to change/add private email address.
+* Turn off autocomplete on registration form.
+* Properly added a link to the settings on plugins page.
+
 = 1.0.2 (2015-06-08) =
 * Checking if selected login exists or not.
 * Major changes in jQuery validation.

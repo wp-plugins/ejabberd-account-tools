@@ -46,11 +46,11 @@ function ejabat_enqueue_register_scripts() {
 }
 add_action('wp_enqueue_scripts', 'ejabat_enqueue_register_scripts');
 
-//Registration form
+//Registration form shortcode
 function ejabat_register_shortcode() {
 	//Get recaptcha
 	$recaptcha_html = apply_filters('recaptcha_html','');
-	//Registration form
+	//Create form
 	$html = '<form id="ejabat_register" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
 		<p id="login">
 			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">

@@ -21,12 +21,14 @@
 //Admin init
 function ejabat_register_settings() {
 	//Register settings
+	register_setting('ejabat_settings', 'ejabat_hostname');
+	register_setting('ejabat_settings', 'ejabat_sender_email');
+	register_setting('ejabat_settings', 'ejabat_sender_name');
 	register_setting('ejabat_settings', 'ejabat_rest_url');
 	register_setting('ejabat_settings', 'ejabat_auth');
 	register_setting('ejabat_settings', 'ejabat_login');
 	register_setting('ejabat_settings', 'ejabat_password');
-	register_setting('ejabat_settings', 'ejabat_set_last');
-	register_setting('ejabat_settings', 'ejabat_hostname');
+	register_setting('ejabat_settings', 'ejabat_set_last');	
 	register_setting('ejabat_settings', 'ejabat_allowed_login_regexp');
 	register_setting('ejabat_settings', 'ejabat_blocked_login_regexp');
 	register_setting('ejabat_settings', 'ejabat_watcher');
@@ -86,6 +88,15 @@ function ejabat_options_scripts() {
 function ejabat_add_meta_boxes() {
 	//Get global variable
 	global $ejabat_options_page_hook;
+	//Add general meta box
+	add_meta_box(
+		'ejabat_general_meta_box',
+		__('General', 'ejabat'),
+		'ejabat_general_meta_box',
+		$ejabat_options_page_hook,
+		'normal',
+		'default'
+	);
 	//Add REST API meta box
 	add_meta_box(
 		'ejabat_rest_api_meta_box',
@@ -125,6 +136,21 @@ function ejabat_add_meta_boxes() {
 }
 add_action('add_meta_boxes', 'ejabat_add_meta_boxes');
 
+//General meta box
+function ejabat_general_meta_box() { ?>
+	<ul>
+		<li>
+			<label for="ejabat_hostname"><?php _e('Hostname', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_hostname" id="ejabat_hostname" value="<?php echo get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
+			</br><small><?php _e('Determines XMPP vhost name, it will be used in all forms.', 'ejabat'); ?></small>
+		</li>
+		<li>
+			<label for="ejabat_sender_email"><?php _e('Sender email address', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_email" id="ejabat_sender_email" value="<?php echo get_option('ejabat_sender_email', 'noreply@'.preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
+			</br><label for="ejabat_sender_name"><?php _e('Sender name', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_name" id="ejabat_sender_name" value="<?php echo get_option('ejabat_sender_name', get_bloginfo()); ?>" /></label>
+			</br><small><?php _e('It will be used in all email notification, eg. when confirming new private email address.', 'ejabat'); ?></small>
+		</li>
+	</ul>
+<?php }
+
 //REST API meta box
 function ejabat_rest_api_meta_box() { ?>
 	<ul>
@@ -147,9 +173,6 @@ function ejabat_rest_api_meta_box() { ?>
 
 function ejabat_registration_meta_box() { ?>
 	<ul>
-		<li>
-			<label for="ejabat_hostname"><?php _e('Used hostname', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_hostname" id="ejabat_hostname" value="<?php echo get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
-		</li>
 		<li>
 			<label for="ejabat_allowed_login_regexp"><?php _e('Regexp for allowed login', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_allowed_login_regexp" id="ejabat_allowed_login_regexp" value="<?php echo get_option('ejabat_allowed_login_regexp', '^[a-z0-9_.-]{3,32}$'); ?>" /></label>
 		</li>
@@ -187,6 +210,7 @@ function ejabat_usage_meta_box() { ?>
     access_commands:
       bot:
         - check_account
+        - check_password
         - private_get
         - private_set
         - register
@@ -197,6 +221,7 @@ function ejabat_usage_meta_box() { ?>
 	<p><?php _e('Second, configure REST API url and optional authorization data. At last, place shortcode on page.', 'ejabat'); ?></p>
 	<ul>
 		<li><b>[ejabat_register]</b></br><?php _e('Simple registration form with validation and recaptcha.', 'ejabat'); ?></br></li>
+		<li><b>[ejabat_change_email]</b></br><?php _e('Form to change / add the private email address.', 'ejabat'); ?></br></li>
 	</ul>
 <?php }
 

@@ -18,130 +18,38 @@
 */
 
 //Validate variables
-var val_login, val_password, val_password_retyped, val_email, val_recaptcha;
+var val_login, val_password, val_email, val_recaptcha;
 
 //Validate login
 function validateLogin($login, $loginTip) {
 	//Reset
 	$login.removeClass('invalid');
 	$loginTip.removeClass('invalid');
-	$loginTip.html(ejabat.checking_login);
-	//Get login
-	var login = $login.val();
-	if(login) {
-		var login_regexp = new RegExp(ejabat.login_regexp);
-		//Invalid login
-		if(!login_regexp.test(login)) {
-			$login.addClass('invalid');
-			$loginTip.addClass('invalid');
-			$loginTip.html(ejabat.invalid_login);
-			val_login = false;
-		}
-		//Valid login
-		else {
-			//Check if an account exists or not
-			jQuery.ajax({
-				method: 'POST',
-				url: ejabat.ajax_url + '&action=ejabat_register_check_login',
-				data: 'login=' + login,
-				dataType: 'json',
-				success: function(response) {
-					//Success
-					if(response.status == 'success') {
-						$login.removeClass('invalid');
-						$loginTip.removeClass('invalid');
-						$loginTip.html(response.message);
-						val_login = true;
-					}
-					//Error
-					else {
-						$login.addClass('invalid');
-						$loginTip.addClass('invalid');
-						$loginTip.html(response.message);
-						val_login = false;
-					}
-				}
-			});
-		}
-	}
+	$loginTip.empty();
 	//Empty field
-	else {
+	if(!$login.val()) {
 		$login.addClass('invalid');
 		$loginTip.addClass('invalid');
 		$loginTip.html(ejabat.empty_field);
 		val_login = false;
 	}
+	else val_login = true;
 }
 
 //Validate password
 function validatePassword($password, $passwordTip) {
-	//Get password
-	var password = $password.val();
-	//Get the password strength
-	var strength = wp.passwordStrength.meter(password, wp.passwordStrength.userInputBlacklist(), password);
 	//Reset
-	$password.removeClass('invalid very-weak weak good strong');
+	$password.removeClass('invalid');
 	$passwordTip.removeClass('invalid');
 	$passwordTip.empty();
 	//Empty field
-	if(!password) {
+	if(!$password.val()) {
 		$password.addClass('invalid');
 		$passwordTip.addClass('invalid');
 		$passwordTip.html(ejabat.empty_field);
 		val_password = false;
 	}
-	//Very week password
-	else if(password && (strength == 0 || strength == 1)) {
-		$password.addClass('very-weak');
-		$passwordTip.addClass('invalid');
-		$passwordTip.html(ejabat.password_very_weak);
-		val_password = false;
-	}
-	//Week password
-	else if(password && strength == 2) {
-		$password.addClass('weak');
-		$passwordTip.addClass('invalid');
-		$passwordTip.html(ejabat.password_weak);
-		val_password = true;
-	}
-	//Good password
-	else if(password && strength == 3) {
-		$password.addClass('good');
-		$passwordTip.html(ejabat.password_good);
-		val_password = true;
-	}
-	//Strong password
-	else if(password && strength == 4) {
-		$password.addClass('strong');
-		$passwordTip.html(ejabat.password_strong);
-		val_password = true;
-	}
-}
-
-function validatePasswordRetyped($password, $passwordRetyped, $passwordRetypedTip) {
-	//Get passwords
-	var password = $password.val();
-	var passwordRetyped = $passwordRetyped.val();
-	//Empty field
-	if(!passwordRetyped) {
-		$passwordRetyped.addClass('invalid');
-		$passwordRetypedTip.addClass('invalid');
-		$passwordRetypedTip.html(ejabat.empty_field);
-		val_password_retyped = false;
-	}
-	//Mismatch
-	else if(password && (password != passwordRetyped)) {
-		$passwordRetyped.addClass('invalid');
-		$passwordRetypedTip.addClass('invalid');
-		$passwordRetypedTip.html(ejabat.passwords_mismatch);
-		val_password_retyped = false;
-	}
-	else {
-		$passwordRetyped.removeClass('invalid');
-		$passwordRetypedTip.removeClass('invalid');
-		$passwordRetypedTip.empty();
-		val_password_retyped = true;
-	}
+	else val_password = true;
 }
 
 //Validate email
@@ -205,15 +113,12 @@ jQuery(document).ready(function($) {
 			validatePassword($('#password input'), $('#password span'));
 		}
 	});
-	$('#password_retyped input').on('change', function() {
-		validatePasswordRetyped($('#password input'), $('#password_retyped input'), $('#password_retyped span'));
-	});
 	//Validate email
 	$('#email input').on('change', function(e) {
 		validateEmail($('#email input'), $('#email span'));
 	});
 	//Submit
-	$("#ejabat_register").submit(function() {
+	$("#ejabat_change_email").submit(function() {
 		//Remove response message
 		$('#response').css('display', '');
 		$('#response').removeClass('ejabat-validation-errors');
@@ -226,7 +131,7 @@ jQuery(document).ready(function($) {
 		//Validate recaptcha
 		validateRecaptcha($('#g-recaptcha-response'), $('#g-recaptcha-0'), $('#recaptcha'));
 		//Validation errors
-		if(!val_login || !val_password || !val_password_retyped || !val_email || !val_recaptcha) {
+		if(!val_login || !val_password || !val_email || !val_recaptcha) {
 			//Empty login
 			if(!val_login) {
 				if(!$('#login input').val()) {
@@ -241,14 +146,6 @@ jQuery(document).ready(function($) {
 					$('#password input').addClass('invalid');
 					$('#password span').addClass('invalid');
 					$('#password span').html(ejabat.empty_field);
-				}
-			}
-			//Empty retyped password
-			if(!val_password_retyped) {
-				if(!$('#password_retyped input').val()) {
-					$('#password_retyped input').addClass('invalid');
-					$('#password_retyped span').addClass('invalid');
-					$('#password_retyped span').html(ejabat.empty_field);
 				}
 			}
 			//Empty email
@@ -271,12 +168,12 @@ jQuery(document).ready(function($) {
 			$.ajax({
 				method: 'POST',
 				url: ejabat.ajax_url,
-				data: $('#ejabat_register').serialize(),
+				data: $('#ejabat_change_email').serialize(),
 				dataType: 'json',
 				success: function(response) {
 					//Success
 					if(response.status == 'success') {
-						$('#ejabat_register')[0].reset();
+						$('#ejabat_change_email')[0].reset();
 						$('#password input').removeClass('weak good strong');
 						$('#password span').empty();
 					}
