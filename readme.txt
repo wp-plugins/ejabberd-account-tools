@@ -4,7 +4,7 @@ Tags: xmpp, jabber, ejabberd
 Donate link: http://beherit.pl/en/donations
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 1.0.2
+Stable tag: 1.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -29,10 +29,12 @@ This section describes how to install the plugin and get it working.
 No questions yet.
 
 == Changelog ==
-= 1.x (2015-06-xx) =
+= 1.1 (2015-06-24) =
 * The ability to change/add private email address.
 * Turn off autocomplete on registration form.
 * Properly added a link to the settings on plugins page.
+* Small changes in translations.
+* Minor visual changes.
 
 = 1.0.2 (2015-06-08) =
 * Checking if selected login exists or not.
@@ -46,12 +48,12 @@ No questions yet.
 * First public version.
 
 == Upgrade Notice ==
-= 1.0.2 (2015-06-08) =
-* Checking if selected login exists or not.
-* Major changes in jQuery validation.
-* Additional verification in ajax to avoid cheating jquery script.
-* Proper resetting the form after success registration.
-* Minor changes in translation.
+= 1.1 (2015-06-24) =
+* The ability to change/add private email address.
+* Turn off autocomplete on registration form.
+* Properly added a link to the settings on plugins page.
+* Small changes in translations.
+* Minor visual changes.
 
 == Other Notes ==
 This plugin is using [Font Awesome](https://fortawesome.github.io/Font-Awesome/).
