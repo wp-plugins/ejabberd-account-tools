@@ -145,15 +145,15 @@ function ajax_ejabat_register_callback() {
 								ejabat_xmpp_post_data('set_last "'.$login.'" "'.$host.'" "'.$now.'" "Registered"');
 								//Set private email
 								ejabat_xmpp_post_data('private_set "'.$login.'" "'.$host.'" "<private xmlns=\'email\'>'.$email.'</private>"');
-								//Send welcome message
-								//TODO
+								//TODO: Send welcome message
 								//Registration watcher
 								if(get_option('ejabat_watcher')) {
 									ejabat_xmpp_post_data('send_message chat "'.$host.'" "'.get_option('ejabat_watcher').'" "Registration watcher" "['.date_i18n('Y-m-d G:i:s', $now + get_option('gmt_offset') * 3600).'] The account '.$login.'@'.$host.' was registered from IP address '.$ip.' by using web registration form."');
 								}
 								//Set registration timeout
 								if(get_option('ejabat_registration_timeout', 3600)) {
-									set_transient('ejabat_'.$ip, $now, get_option('ejabat_registration_timeout', 3600));
+									$data = array('timestamp' => $now, 'login' => $login, 'email' => $email);
+									set_transient('ejabat_'.$ip, $data, get_option('ejabat_registration_timeout', 3600));
 								}
 							}
 							//Already registered

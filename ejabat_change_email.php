@@ -148,7 +148,7 @@ function ajax_ejabat_change_email_callback() {
 					else if($message=='0') {
 						//Set transient
 						$code = bin2hex(openssl_random_pseudo_bytes(16));
-						$data = array('timestamp' => current_time('timestamp', 1), 'login' => $login, 'email' => $email);
+						$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'email' => $email);
 						set_transient('ejabat_'.$code, $data, get_option('ejabat_change_email_timeout', 900));
 						//Email data
 						$subject  = sprintf(__('Confirm the email address for your %s account', 'ejabat'), $host);
