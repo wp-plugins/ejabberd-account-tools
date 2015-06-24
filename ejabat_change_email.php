@@ -154,7 +154,7 @@ function ajax_ejabat_change_email_callback() {
 						$subject  = sprintf(__('Confirm the email address for your %s account', 'ejabat'), $host);
 						$body = sprintf(__('Hey %s,'."\n\n".'You have changed the private email address for your XMPP account %s. To complete the change, please click on the confirmation link:'."\n\n".'%s'."\n\n".'If you haven\'t made this change, simply disregard this email.'."\n\n".'Greetings,'."\n".'%s', 'ejabat'), $login, $login.'@'.$host, get_bloginfo('wpurl').$_POST['_wp_http_referer'].'?code='.$code, get_option('ejabat_sender_name', get_bloginfo()));
 						$headers[] = 'From: '.get_option('ejabat_sender_name', get_bloginfo()).' <'.get_option('ejabat_sender_email', 'noreply@'.preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])).'>';
-						wp_mail($email, $subject, $body, $headers);
+						wp_mail($login.' <'.$email.'>', $subject, $body, $headers);
 						//Return message
 						$status = 'success';
 						$message = __('An email has been sent to you to confirm changes. It contains a confirmation link that you have to click.', 'ejabat');
