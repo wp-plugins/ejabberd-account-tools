@@ -51,7 +51,7 @@ function ejabat_change_email_shortcode() {
 			$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
 			$email = $data['email'];
 			//Try set private email
-			$message = ejabat_xmpp_post_data("private_set ".$login." ".$host." \"<private xmlns='email'>".$email."</private>\"");
+			$message = ejabat_xmpp_post_data('private_set "'.$login.'" "'.$host.'" "<private xmlns=\'email\'>'.$email.'</private>"');
 			//Server unavailable
 			if(is_null($message)) {
 				$response = '<div id="response" class="ejabat-display-none ejabat-form-error" style="display: inline-block;">'.__('Server is temporarily unavailable, please try again in a moment.', 'ejabat').'</div>';
@@ -132,8 +132,8 @@ function ajax_ejabat_change_email_callback() {
 				else {
 					$login = $_POST['login'];
 					$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
-					$password = $_POST['password'];
-					$message = ejabat_xmpp_post_data("check_password ".$login." ".$host." ".$password); //TODO: change to check_password_hash
+					$password = stripslashes_deep($_POST['password']);
+					$message = ejabat_xmpp_post_data('check_password "'.$login.'" "'.$host.'" "'.$password.'"'); //TODO: change to check_password_hash 
 					//Server unavailable
 					if(is_null($message)) {
 						$status = 'error';

@@ -129,8 +129,8 @@ function ajax_ejabat_register_callback() {
 						//Try register account
 						else {
 							$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
-							$password = $_POST['password'];
-							$message = ejabat_xmpp_post_data('register '.$login.' '.$host.' '.$password);
+							$password = stripslashes_deep($_POST['password']);
+							$message = ejabat_xmpp_post_data('register "'.$login.'" "'.$host.'" "'.$password.'"');
 							//Server unavailable
 							if(is_null($message)) {
 								$status = 'error';
@@ -142,14 +142,14 @@ function ajax_ejabat_register_callback() {
 								$message = sprintf(__('Account %s has been successfully registered.', 'ejabat'), $login.'@'.$host);
 								//Set last activity information
 								$now = current_time('timestamp', 1);
-								ejabat_xmpp_post_data('set_last '.$login.' '.$host.' '.$now.' "Registered"');
+								ejabat_xmpp_post_data('set_last "'.$login.'" "'.$host.'" "'.$now.'" "Registered"');
 								//Set private email
-								ejabat_xmpp_post_data("private_set ".$login." ".$host." \"<private xmlns='email'>".$email."</private>\"");
+								ejabat_xmpp_post_data('private_set "'.$login.'" "'.$host.'" "<private xmlns=\'email\'>'.$email.'</private>"');
 								//Send welcome message
 								//TODO
 								//Registration watcher
 								if(get_option('ejabat_watcher')) {
-									ejabat_xmpp_post_data('send_message chat '.$host.' '.get_option('ejabat_watcher').' "Registration watcher" "['.date_i18n('Y-m-d G:i:s', $now + get_option('gmt_offset') * 3600).'] The account '.$login.'@'.$host.' was registered from IP address '.$ip.' by using web registration form."');
+									ejabat_xmpp_post_data('send_message chat "'.$host.'" "'.get_option('ejabat_watcher').'" "Registration watcher" "['.date_i18n('Y-m-d G:i:s', $now + get_option('gmt_offset') * 3600).'] The account '.$login.'@'.$host.' was registered from IP address '.$ip.' by using web registration form."');
 								}
 								//Set registration timeout
 								if(get_option('ejabat_registration_timeout', 3600)) {
@@ -196,7 +196,7 @@ function ajax_ejabat_register_check_login() {
 	else {
 		$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
 		$password = $_POST['password'];
-		$message = ejabat_xmpp_post_data('check_account '.$login.' '.$host);
+		$message = ejabat_xmpp_post_data('check_account "'.$login.'" "'.$host.'"');
 		//Server unavailable
 		if(is_null($message)) {
 			$status = 'error';
