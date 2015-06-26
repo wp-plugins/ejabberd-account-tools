@@ -33,6 +33,7 @@ function ejabat_register_settings() {
 	register_setting('ejabat_settings', 'ejabat_blocked_login_regexp');
 	register_setting('ejabat_settings', 'ejabat_watcher');
 	register_setting('ejabat_settings', 'ejabat_registration_timeout');
+	register_setting('ejabat_settings', 'ejabat_change_email_timeout');
 	//Add link to the settings on plugins page
 	add_filter('plugin_action_links', 'ejabat_plugin_action_links', 10, 2);
 }
@@ -115,6 +116,15 @@ function ejabat_add_meta_boxes() {
 		'normal',
 		'default'
 	);
+	//Add changing email meta box
+	add_meta_box(
+		'ejabat_changing_email_meta_box',
+		__('Changing email', 'ejabat'),
+		'ejabat_changing_email_meta_box',
+		$ejabat_options_page_hook,
+		'normal',
+		'default'
+	);
 	//Add donate meta box
 	add_meta_box(
 		'ejabat_donate_meta_box',
@@ -184,8 +194,17 @@ function ejabat_registration_meta_box() { ?>
 			</br><small><?php _e('Sends information about new registration to specified JID. Leave field empty if disabled.', 'ejabat'); ?></small>
 		</li>
 		<li>
-			<label for="ejabat_registration_timeout"><?php _e('Registration timeout', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_registration_timeout" id="ejabat_registration_timeout" value="<?php echo get_option('ejabat_registration_timeout', 3600); ?>" /></label>
-			</br><small><?php _e('Limits the frequency of registration from a given IP address. The timeout is expressed in seconds, to disable this limitation enter 0.', 'ejabat'); ?></small>
+			<label for="ejabat_registration_timeout"><?php _e('Registration timeout', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_registration_timeout" id="ejabat_registration_timeout" value="<?php echo get_option('ejabat_registration_timeout', 3600); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
+			</br><small><?php _e('Limits the frequency of registration from a given IP address. To disable this limitation enter 0.', 'ejabat'); ?></small>
+		</li>
+	</ul>
+<?php }
+
+function ejabat_changing_email_meta_box() { ?>
+	<ul>
+		<li>
+			<label for="ejabat_change_email_timeout"><?php _e('Confirmation link expiration', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_change_email_timeout" id="ejabat_change_email_timeout" value="<?php echo get_option('ejabat_change_email_timeout', 900); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
+			</br><small><?php _e('Determines expiration time of the each confirmation link. To disable this limitation enter 0.', 'ejabat'); ?></small>
 		</li>
 	</ul>
 <?php }
