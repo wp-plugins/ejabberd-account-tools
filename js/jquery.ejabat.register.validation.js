@@ -102,7 +102,7 @@ function validatePassword($password, $passwordTip) {
 		$password.addClass('weak');
 		$passwordTip.addClass('invalid');
 		$passwordTip.html(ejabat.password_weak);
-		val_password = true;
+		val_password = false;
 	}
 	//Good password
 	else if(password && strength == 3) {
@@ -201,7 +201,7 @@ jQuery(document).ready(function($) {
 	//Validate password
 	$('#password input').on('keyup change', function(e) {
 		var charCode = e.which || e.keyCode;
-		if (!((charCode === 9) || (charCode === 16))) {
+		if(!((charCode === 9) || (charCode === 16))) {
 			validatePassword($('#password input'), $('#password span'));
 		}
 	});
