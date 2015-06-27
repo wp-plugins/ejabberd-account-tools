@@ -45,7 +45,7 @@ function ejabat_change_email_shortcode() {
 		//Verify transient
 		$code = $_GET['code'];
 		//Transient valid
-		if(true == ($data = get_transient('ejabat_'.$code))) {
+		if(true == ($data = get_transient('ejabat_email_'.$code))) {
 			//Get data
 			$login = $data['login'];
 			$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
@@ -58,7 +58,7 @@ function ejabat_change_email_shortcode() {
 			}
 			//Private email changed
 			else if($message=='0') {
-				delete_transient('ejabat_'.$code);
+				delete_transient('ejabat_email_'.$code);
 				$response = '<div id="response" class="ejabat-display-none ejabat-form-success" style="display: inline-block;">'.sprintf(__('Private email address, for your XMPP account %s, has been successfully changed.', 'ejabat'), $login.'@'.$host).'</div>';
 			}
 			//Unexpected error
@@ -68,7 +68,7 @@ function ejabat_change_email_shortcode() {
 		}
 		//Transient expired or not valid
 		else {
-			delete_transient('ejabat_'.$code);
+			delete_transient('ejabat_email_'.$code);
 			$response = '<div id="response" class="ejabat-display-none ejabat-form-blocked" style="display: inline-block;">'.__('The link to change private email address has expired or is not valid. Please fill the form and submit it again.', 'ejabat').'</div>';
 		}
 	}
@@ -127,9 +127,9 @@ function ajax_ejabat_change_email_callback() {
 				if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 					$status = 'blocked';
 					$message = __('Email address seems invalid, change it and try again.', 'ejabat');
-				}
-				//Check login and password
+				}				
 				else {
+					//Check login and password
 					$login = stripslashes_deep($_POST['login']);
 					$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
 					$password = stripslashes_deep($_POST['password']);
@@ -149,7 +149,7 @@ function ajax_ejabat_change_email_callback() {
 						//Set transient
 						$code = bin2hex(openssl_random_pseudo_bytes(16));
 						$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'email' => $email);
-						set_transient('ejabat_'.$code, $data, get_option('ejabat_change_email_timeout', 900));
+						set_transient('ejabat_email_'.$code, $data, get_option('ejabat_change_email_timeout', 900));
 						//Email data
 						$subject  = sprintf(__('Confirm the email address for your %s account', 'ejabat'), $host);
 						$body = sprintf(__('Hey %s,'."\n\n".'You have changed the private email address for your XMPP account %s. To complete the change, please click on the confirmation link:'."\n\n".'%s'."\n\n".'If you haven\'t made this change, simply disregard this email.'."\n\n".'Greetings,'."\n".'%s', 'ejabat'), $login, $login.'@'.$host, '<'.get_bloginfo('wpurl').$_POST['_wp_http_referer'].'?code='.$code.'>', get_option('ejabat_sender_name', get_bloginfo()));
@@ -161,7 +161,7 @@ function ajax_ejabat_change_email_callback() {
 						}
 						//Problem with sending email
 						else {
-							delete_transient('ejabat_'.$code);
+							delete_transient('ejabat_email_'.$code);
 							$status = 'error';
 							$message = __('Failed to send email, try again.', 'ejabat');
 						}
