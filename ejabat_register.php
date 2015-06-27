@@ -65,7 +65,7 @@ function ejabat_register_shortcode() {
 			<span class="tip"></span>
 		</div>
 		<div id="email">
-			<input type="email" name="email" placeholder="'.__('Private e-mail', 'ejabat').'">
+			<input type="email" name="email" placeholder="'.__('Private email', 'ejabat').'">
 			<span class="tip"></span>
 		</div>
 		'.$recaptcha_html.'

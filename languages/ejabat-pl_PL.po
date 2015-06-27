@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ejabberd Account Tools\n"
-"POT-Creation-Date: 2015-06-24 21:42+0100\n"
-"PO-Revision-Date: 2015-06-24 21:48+0100\n"
+"POT-Creation-Date: 2015-06-27 18:02+0100\n"
+"PO-Revision-Date: 2015-06-27 18:02+0100\n"
 "Last-Translator: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language-Team: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language: pl_PL\n"
@@ -214,7 +214,7 @@ msgstr ""
 "Prywatny adres e-mail, na Twoim koncie XMPP %s, został pomyślnie zmieniony."
 
 #: ejabat_change_email.php:66 ejabat_change_email.php:172
-#: ejabat_register.php:167 ejabat_register.php:218
+#: ejabat_register.php:167 ejabat_register.php:217
 msgid "Unexpected error occurred, try again."
 msgstr "Wystąpił nieoczekiwany błąd, spróbuj ponownie."
 
@@ -338,7 +338,7 @@ msgid "Confirm password"
 msgstr "Potwierdź hasło"
 
 #: ejabat_register.php:68
-msgid "Private e-mail"
+msgid "Private email"
 msgstr "Prywatny e-mail"
 
 #: ejabat_register.php:76
@@ -376,21 +376,14 @@ msgstr "Wybrany login jest już zarejestrowany, zmień go i spróbuj ponownie."
 msgid "Login contains illegal words."
 msgstr "Login zawiera niedozwolone słowa."
 
-#: ejabat_register.php:203
+#: ejabat_register.php:202
 msgid "Server is temporarily unavailable."
 msgstr "Serwer jest chwilowo niedostępny."
 
-#: ejabat_register.php:208
+#: ejabat_register.php:207
 msgid "Selected login is available."
 msgstr "Wybrany login jest dostępny."
 
-#: ejabat_register.php:213
+#: ejabat_register.php:212
 msgid "Selected login is already registered."
 msgstr "Wybrany login jest już zarejestrowany."
-
-#~ msgid ""
-#~ "Limits the frequency of registration from a given IP address. The timeout "
-#~ "is expressed in seconds, to disable this limitation enter 0."
-#~ msgstr ""
-#~ "Ogranicza częstotliwość rejestracji z danego adresu IP. Limit czasu jest "
-#~ "wyrażony w sekundach, aby wyłączyć to ograniczenie wpisz 0."
