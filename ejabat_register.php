@@ -18,12 +18,32 @@
 	along with GNU Radio. If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Enqueue style & scripts
+//Enqueue styles & scripts
 function ejabat_enqueue_register_scripts() {
 	global $post;
 	if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'ejabat_register')) {
+		//Get hints args
+		$show_hints = get_option('ejabat_show_hints', true);
+		if($show_hints) {
+			$hints = apply_filters('ejabat_hints_args', array(
+				'login' => get_option('ejabat_login_hint', __('At least 3 and up to 32 characters, only letters and numbers', 'ejabat')),
+				'password' => get_option('ejabat_password_hint', __('Required at least good password', 'ejabat')),
+				'email' => get_option('ejabat_email_hint', __('Required only for password recovery', 'ejabat'))
+			));
+		}
+		//Enqueue styles
 		wp_enqueue_style('ejabat', plugin_dir_url(__FILE__).'css/style.css', array(), EJABAT_VERSION, 'all');
 		wp_enqueue_style('fontawesome', plugin_dir_url(__FILE__).'css/font-awesome.min.css', array(), '4.3.0', 'all');
+		wp_enqueue_style('hint', plugin_dir_url(__FILE__).'css/hint.min.css', array(), '1.3.5', 'all');
+		//Enqueue scripts
+		if($show_hints) {
+			wp_enqueue_script('ejabat-hints', plugin_dir_url(__FILE__).'js/jquery.ejabat.hints.min.js', array('jquery'), EJABAT_VERSION, true);
+			wp_localize_script('ejabat-hints', 'ejabat_hints', array(
+				'login' => $hints['login'],
+				'password' => $hints['password'],
+				'email' => $hints['email'],
+			));
+		}
 		wp_enqueue_script('ejabat-register-valid', plugin_dir_url(__FILE__).'js/jquery.ejabat.register.validation.min.js', array('jquery'), EJABAT_VERSION, true);
 		wp_localize_script('ejabat-register-valid', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),

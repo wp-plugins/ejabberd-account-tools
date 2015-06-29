@@ -127,13 +127,13 @@ function ajax_ejabat_change_email_callback() {
 				if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 					$status = 'blocked';
 					$message = __('Email address seems invalid, change it and try again.', 'ejabat');
-				}				
+				}
 				else {
 					//Check login and password
 					$login = stripslashes_deep($_POST['login']);
 					$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
 					$password = stripslashes_deep($_POST['password']);
-					$message = ejabat_xmpp_post_data('check_password "'.$login.'" "'.$host.'" "'.$password.'"'); //TODO: change to check_password_hash 
+					$message = ejabat_xmpp_post_data('check_password "'.$login.'" "'.$host.'" "'.$password.'"'); //TODO: change to check_password_hash
 					//Server unavailable
 					if(is_null($message)) {
 						$status = 'error';

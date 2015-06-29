@@ -24,11 +24,15 @@ function ejabat_register_settings() {
 	register_setting('ejabat_settings', 'ejabat_hostname');
 	register_setting('ejabat_settings', 'ejabat_sender_email');
 	register_setting('ejabat_settings', 'ejabat_sender_name');
+	register_setting('ejabat_settings', 'ejabat_show_hints');
+	register_setting('ejabat_settings', 'ejabat_login_hint');
+	register_setting('ejabat_settings', 'ejabat_password_hint');
+	register_setting('ejabat_settings', 'ejabat_email_hint');
 	register_setting('ejabat_settings', 'ejabat_rest_url');
 	register_setting('ejabat_settings', 'ejabat_auth');
 	register_setting('ejabat_settings', 'ejabat_login');
 	register_setting('ejabat_settings', 'ejabat_password');
-	register_setting('ejabat_settings', 'ejabat_set_last');	
+	register_setting('ejabat_settings', 'ejabat_set_last');
 	register_setting('ejabat_settings', 'ejabat_allowed_login_regexp');
 	register_setting('ejabat_settings', 'ejabat_blocked_login_regexp');
 	register_setting('ejabat_settings', 'ejabat_watcher');
@@ -154,9 +158,22 @@ function ejabat_general_meta_box() { ?>
 			</br><small><?php _e('Determines XMPP vhost name, it will be used in all forms.', 'ejabat'); ?></small>
 		</li>
 		<li>
-			<label for="ejabat_sender_email"><?php _e('Sender email address', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_email" id="ejabat_sender_email" value="<?php echo get_option('ejabat_sender_email', 'noreply@'.preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
+			<label for="ejabat_sender_email"><?php _e('Sender email address', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_email" id="ejabat_sender_email" value="<?php echo get_option('ejabat_sender_email', get_option('admin_email')); ?>" /></label>
 			</br><label for="ejabat_sender_name"><?php _e('Sender name', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_name" id="ejabat_sender_name" value="<?php echo get_option('ejabat_sender_name', get_bloginfo()); ?>" /></label>
 			</br><small><?php _e('It will be used in all email notification, eg. when resetting password or confirming new private email address.', 'ejabat'); ?></small>
+		</li>
+		<li>
+			<label for="ejabat_show_hints"><input type="checkbox" id="ejabat_show_hints" name="ejabat_show_hints" value="1" <?php echo checked(1, get_option('ejabat_show_hints', true), true ); ?> /><?php _e('Show information hints on forms', 'ejabat'); ?></label>
+			</br><small><?php printf(__('To support multi-language use %s filter.', 'ejabat'), 'ejabat_hints_args'); ?></small>
+		</li>
+		<li>
+			<label for="ejabat_login_hint"><?php _e('Login', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_login_hint" id="ejabat_login_hint" value="<?php echo get_option('ejabat_login_hint', __('At least 3 and up to 32 characters, only letters and numbers', 'ejabat')); ?>" /></label>
+		</li>
+		<li>
+			<label for="ejabat_password_hint"><?php _e('Password', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_password_hint" id="ejabat_password_hint" value="<?php echo get_option('ejabat_password_hint', __('Required at least good password', 'ejabat')); ?>" /></label>
+		</li>
+		<li>
+			<label for="ejabat_email_hint"><?php _e('Email', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_email_hint" id="ejabat_email_hint" value="<?php echo get_option('ejabat_email_hint', __('Required only for password recovery', 'ejabat')); ?>" /></label>
 		</li>
 	</ul>
 <?php }
