@@ -124,7 +124,7 @@ function ajax_ejabat_change_email_callback() {
 			else {
 				//Verify email
 				$email = stripslashes_deep($_POST['email']);
-				if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				if(!filter_var($email, FILTER_VALIDATE_EMAIL) || !ejabat_validate_email_mxrecord($email)) {
 					$status = 'blocked';
 					$message = __('Email address seems invalid, change it and try again.', 'ejabat');
 				}

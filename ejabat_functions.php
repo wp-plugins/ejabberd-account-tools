@@ -61,3 +61,13 @@ function ejabat_xmpp_post_data($data) {
 	//No data
 	return null;
 }
+
+//Validating email address by checking MX record
+function ejabat_validate_email_mxrecord($email) {
+	list($user, $domain) = explode('@', $email);
+	$arr= dns_get_record($domain, DNS_MX);
+	if($arr[0]['host'] == $domain && !empty($arr[0]['target'])) {
+		return true;
+	}
+	return false;
+}
