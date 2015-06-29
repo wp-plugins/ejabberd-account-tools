@@ -28,6 +28,7 @@ function ejabat_enqueue_change_email_scripts() {
 		wp_localize_script('ejabat-change_email-valid', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),
 			'login_host' => '@'.get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])),
+			'checking_email' => sprintf(__('%s Checking email address...', 'ejabat'), '<i class="fa fa-spinner fa-pulse"></i>'),
 			'invalid_email' => __('Email address seems invalid.', 'ejabat'),
 			'recaptcha_verify' => __('Please verify the Captcha.', 'ejabat'),
 			'empty_field' => __('Please fill the required field.', 'ejabat'),

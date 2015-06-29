@@ -71,3 +71,19 @@ function ejabat_validate_email_mxrecord($email) {
 	}
 	return false;
 }
+function ajax_ejabat_validate_email_mxrecord() {
+	//Get email
+	$email = stripslashes_deep($_POST['email']);
+	//Verify email
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL) || !ejabat_validate_email_mxrecord($email)) {
+		$status = 'blocked';
+	}
+	else {
+		$status = 'success';
+	}
+	//Return response
+	$resp = array('status' => $status);
+	wp_send_json($resp);
+}
+add_action('wp_ajax_ejabat_validate_email', 'ajax_ejabat_validate_email_mxrecord');
+add_action('wp_ajax_nopriv_ejabat_validate_email', 'ajax_ejabat_validate_email_mxrecord');

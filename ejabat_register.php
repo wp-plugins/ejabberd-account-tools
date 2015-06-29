@@ -55,6 +55,7 @@ function ejabat_enqueue_register_scripts() {
 			'password_good' => __('Password is good.', 'ejabat'),
 			'password_strong' => __('Password is strong.', 'ejabat'),
 			'passwords_mismatch' => __('Password mismatch with the confirmation.', 'ejabat'),
+			'checking_email' => sprintf(__('%s Checking email address...', 'ejabat'), '<i class="fa fa-spinner fa-pulse"></i>'),
 			'invalid_email' => __('Email address seems invalid.', 'ejabat'),
 			'recaptcha_verify' => __('Please verify the Captcha.', 'ejabat'),
 			'empty_field' => __('Please fill the required field.', 'ejabat'),
