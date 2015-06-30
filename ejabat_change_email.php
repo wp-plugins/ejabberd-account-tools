@@ -59,7 +59,7 @@ function ejabat_change_email_shortcode() {
 			//Private email changed
 			else if($message=='0') {
 				delete_transient('ejabat_email_'.$code);
-				$response = '<div id="response" class="ejabat-display-none ejabat-form-success" style="display: inline-block;">'.sprintf(__('Private email address, for your XMPP account %s, has been successfully changed.', 'ejabat'), $login.'@'.$host).'</div>';
+				$response = '<div id="response" class="ejabat-display-none ejabat-form-success" style="display: inline-block;">'.sprintf(__('Private email address, for your XMPP account %s, has been successfully changed to %s.', 'ejabat'), $login.'@'.$host, $email).'</div>';
 			}
 			//Unexpected error
 			else {

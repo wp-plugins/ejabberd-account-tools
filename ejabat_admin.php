@@ -154,8 +154,8 @@ add_action('add_meta_boxes', 'ejabat_add_meta_boxes');
 function ejabat_general_meta_box() { ?>
 	<ul>
 		<li>
-			<label for="ejabat_hostname"><?php _e('Hostname', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_hostname" id="ejabat_hostname" value="<?php echo get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
-			</br><small><?php _e('Determines XMPP vhost name, it will be used in all forms.', 'ejabat'); ?></small>
+			<label for="ejabat_hostname"><?php _e('Default hostname', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_hostname" id="ejabat_hostname" value="<?php echo get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
+			</br><small><?php _e('Determines XMPP vhost name which will be default used in all forms.', 'ejabat'); ?></small>
 		</li>
 		<li>
 			<label for="ejabat_sender_email"><?php _e('Sender email address', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_email" id="ejabat_sender_email" value="<?php echo get_option('ejabat_sender_email', get_option('admin_email')); ?>" /></label>
