@@ -27,7 +27,6 @@ function ejabat_enqueue_change_email_scripts() {
 		wp_enqueue_script('ejabat-change_email-valid', plugin_dir_url(__FILE__).'js/jquery.ejabat.change-email.validation.min.js', array('jquery'), EJABAT_VERSION, true);
 		wp_localize_script('ejabat-change_email-valid', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),
-			'login_host' => '@'.get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])),
 			'checking_email' => sprintf(__('%s Checking email address...', 'ejabat'), '<i class="fa fa-spinner fa-pulse"></i>'),
 			'invalid_email' => __('Email address seems invalid.', 'ejabat'),
 			'recaptcha_verify' => __('Please verify the Captcha.', 'ejabat'),
@@ -49,7 +48,7 @@ function ejabat_change_email_shortcode() {
 		if(true == ($data = get_transient('ejabat_email_'.$code))) {
 			//Get data
 			$login = $data['login'];
-			$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
+			$host =  $data['host'];
 			$email = $data['email'];
 			//Try set private email
 			$message = ejabat_xmpp_post_data('private_set "'.$login.'" "'.$host.'" "<private xmlns=\'email\'>'.$email.'</private>"');
@@ -131,8 +130,7 @@ function ajax_ejabat_change_email_callback() {
 				}
 				else {
 					//Check login and password
-					$login = stripslashes_deep($_POST['login']);
-					$host = get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME']));
+					list($login, $host) = array_pad(explode('@', stripslashes_deep($_POST['login']), 2), 2, get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])));
 					$password = stripslashes_deep($_POST['password']);
 					$message = ejabat_xmpp_post_data('check_password "'.$login.'" "'.$host.'" "'.$password.'"'); //TODO: change to check_password_hash
 					//Server unavailable
@@ -149,7 +147,7 @@ function ajax_ejabat_change_email_callback() {
 					else if($message=='0') {
 						//Set transient
 						$code = bin2hex(openssl_random_pseudo_bytes(16));
-						$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'email' => $email);
+						$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'host' => $host, 'email' => $email);
 						set_transient('ejabat_email_'.$code, $data, get_option('ejabat_change_email_timeout', 900));
 						//Email data
 						$subject  = sprintf(__('Confirm the email address for your %s account', 'ejabat'), $host);

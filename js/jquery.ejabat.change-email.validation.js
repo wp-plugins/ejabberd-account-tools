@@ -125,7 +125,7 @@ function validateRecaptcha($recaptcha, $recaptchaInput, $recaptchaTip) {
 jQuery(document).ready(function($) {
 	//Validate login
 	$('#login input').on('change', function() {
-		$('#login input').val($('#login input').val().toLowerCase().replace(ejabat.login_host, '').trim());
+		$('#login input').val($('#login input').val().toLowerCase().trim());
 		validateLogin($('#login input'), $('#login span'));
 	});
 	//Validate password
