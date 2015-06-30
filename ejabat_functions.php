@@ -23,9 +23,8 @@ function ejabat_xmpp_post_data($data) {
 	//Authorization
 	$auth = get_option('ejabat_auth');
 	if($auth) {
-		$login = str_replace('@', '" "', get_option('ejabat_login'));
-		$password = get_option('ejabat_password');
-		$auth_data = '--auth "'.$login.'" "'.$password.'" ';
+		list($user, $domain) = explode('@', get_option('ejabat_login'));
+		$auth_data = '--auth "'.$user.'" "'.$domain.'" "'.get_option('ejabat_password').'" ';
 		$data = $auth_data.$data;
 	}
 	//POST data
@@ -47,7 +46,7 @@ function ejabat_xmpp_post_data($data) {
 			$now = current_time('timestamp', 1);
 			//POST data
 			$args = array(
-				'body' => $auth_data.'set_last "'.$login.'" "'.$now.'" "Set by XMPP Statistics"',
+				'body' => $auth_data.'set_last "'.$user.'" "'.$domain.'" "'.$now.'" "Set by XMPP Statistics"',
 				'timeout' => 5,
 				'redirection' => 0,
 				'sslverify' => false
