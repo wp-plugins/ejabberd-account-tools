@@ -30,7 +30,6 @@ License: GPLv3
 	along with GNU Radio. If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 //Translate plugin meta-data
 __('http://beherit.pl/en/wordpress/plugins/ejabberd-account-tools', 'ejabat');
 __('Provide ejabberd account tools such as registration form, deleting an account, resetting account password.', 'ejabat');

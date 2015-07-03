@@ -46,7 +46,7 @@ function ejabat_xmpp_post_data($data) {
 			$now = current_time('timestamp', 1);
 			//POST data
 			$args = array(
-				'body' => $auth_data.'set_last "'.$user.'" "'.$domain.'" "'.$now.'" "Set by XMPP Statistics"',
+				'body' => $auth_data.'set_last "'.$user.'" "'.$domain.'" "'.$now.'" "Set by Ejabberd Account Tools"',
 				'timeout' => 5,
 				'redirection' => 0,
 				'sslverify' => false
