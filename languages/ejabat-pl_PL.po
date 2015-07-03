@@ -1,21 +1,37 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ejabberd Account Tools\n"
-"POT-Creation-Date: 2015-06-30 23:23+0200\n"
-"PO-Revision-Date: 2015-06-30 23:23+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-03 17:33+0200\n"
+"PO-Revision-Date: 2015-07-03 17:33+0200\n"
 "Last-Translator: Krzysztof Grochocki <kontakt@beherit.pl>\n"
-"Language-Team: Krzysztof Grochocki <kontakt@beherit.pl>\n"
+"Language-Team: \n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.2\n"
-"X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: Poedit 1.8.2\n"
 "X-Poedit-SearchPath-0: .\n"
+
+# URI of the plugin
+#: ejabat.php:35
+msgid "http://beherit.pl/en/wordpress/plugins/ejabberd-account-tools"
+msgstr "http://beherit.pl/pl/wordpress/wtyczki/ejabberd-account-tools"
+
+# Description of the plugin
+#: ejabat.php:36
+msgid ""
+"Provide ejabberd account tools such as registration form, deleting an "
+"account, resetting account password."
+msgstr ""
+"Dostarcza narzędzia konta ejabberd, takie jak formularzu rejestracji, "
+"usuwanie konta, resetowanie hasła do konta."
 
 #: ejabat_admin.php:49
 msgid "Settings"
@@ -421,17 +437,3 @@ msgstr "Wybrany login jest dostępny."
 #: ejabat_register.php:233
 msgid "Selected login is already registered."
 msgstr "Wybrany login jest już zarejestrowany."
-
-#~ msgid ""
-#~ "Private email address, for your XMPP account %s, has been successfully "
-#~ "changed."
-#~ msgstr ""
-#~ "Prywatny adres e-mail, dla Twojego konta XMPP %s, został pomyślnie "
-#~ "zmieniony."
-
-#~ msgid "Determines XMPP vhost name, it will be used in all forms."
-#~ msgstr ""
-#~ "Określa nazwę vhosta XMPP, nazwa będzie używana we wszystkich formach."
-
-#~ msgid "Hostname"
-#~ msgstr "Nazwa hosta"

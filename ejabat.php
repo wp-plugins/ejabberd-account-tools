@@ -2,10 +2,12 @@
 /*
 Plugin Name: Ejabberd Account Tools
 Plugin URI: http://beherit.pl/en/wordpress/plugins/ejabberd-account-tools
-Description: Provide ejabberd account tools such as registration form, deleting an account, changing account password and resetting it.
+Description: Provide ejabberd account tools such as registration form, deleting an account, resetting account password.
 Version: 1.2
 Author: Krzysztof Grochocki
 Author URI: http://beherit.pl/
+Text Domain: ejabat
+Domain Path: /languages
 License: GPLv3
 */
 
@@ -27,6 +29,11 @@ License: GPLv3
 	You should have received a copy of the GNU General Public License
 	along with GNU Radio. If not, see <http://www.gnu.org/licenses/>.
 */
+
+
+//Translate plugin meta-data
+__('http://beherit.pl/en/wordpress/plugins/ejabberd-account-tools', 'ejabat');
+__('Provide ejabberd account tools such as registration form, deleting an account, resetting account password.', 'ejabat');
 
 //Define plugin version variable
 define('EJABAT_VERSION', '1.2');
