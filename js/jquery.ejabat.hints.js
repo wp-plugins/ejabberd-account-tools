@@ -36,10 +36,10 @@ jQuery(document).ready(function($) {
 		$('.' + _hintPos).removeClass(_hintPos).addClass(hintPos);
 	});
 	//Login hint
-	$('#login input').on('focusin', function() {
+	$('.hints #login input').on('focusin', function() {
 		$('#login').addClass('hint--always hint--info ' + hintPos).attr('data-hint', ejabat_hints.login);
 	});
-	$('#login input').on('focusout', function() {
+	$('.hints #login input').on('focusout', function() {
 		$('#login').removeAttr('class').removeAttr('data-hint');
 	});
 	//Password hint

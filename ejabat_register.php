@@ -72,13 +72,13 @@ function ejabat_register_shortcode() {
 	//Get recaptcha
 	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Create form
-	$html = '<form id="ejabat_register" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
+	$html = '<form id="ejabat_register" class="ejabat hints" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
 		<div id="login">
-			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
+			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</div>
 		<div id="password">
-			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
+			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</div>
 		<div id="password_retyped">

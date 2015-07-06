@@ -39,8 +39,9 @@ add_action('wp_enqueue_scripts', 'ejabat_enqueue_change_email_scripts');
 
 //Change email shortcode
 function ejabat_change_email_shortcode() {
-	//Link to change email
+	//Default response
 	$response = '<div id="response" class="ejabat-display-none"></div>';
+	//Link to change email	
 	if(isset($_GET['code'])) {
 		//Verify transient
 		$code = $_GET['code'];
@@ -75,17 +76,17 @@ function ejabat_change_email_shortcode() {
 	//Get recaptcha
 	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Create form
-	$html = '<form id="ejabat_change_email" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
+	$html = '<form id="ejabat_change_email" class="ejabat" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
 		<div id="login">
-			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
+			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</div>
 		<div id="password">
-			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly onfocus="this.removeAttribute(\'readonly\');">
+			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</div>
 		<div id="email">
-			<input type="email" name="email" placeholder="'.__('New private e-mail', 'ejabat').'">
+			<input type="email" name="email" placeholder="'.__('New private email', 'ejabat').'">
 			<span class="tip"></span>
 		</div>
 		'.$recaptcha_html.'

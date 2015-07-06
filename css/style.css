@@ -18,16 +18,14 @@
 */
 
 /* Blocks style */
-#ejabat_register #login, #ejabat_register #password, #ejabat_register #password_retyped, #ejabat_register #email,
-#ejabat_change_email #login, #ejabat_change_email #password, #ejabat_change_email #email{
+.ejabat #login, .ejabat #password, .ejabat #password_retyped, .ejabat #email{
 margin-bottom:1.5em;
 display:block;
 max-width:302px;
 width:100%;
 }
 /* Inputs style */
-#ejabat_register input[type="text"], #ejabat_register input[type="password"], #ejabat_register input[type="email"],
-#ejabat_change_email input[type="text"], #ejabat_change_email input[type="password"], #ejabat_change_email input[type="email"]{
+.ejabat input[type="text"], .ejabat input[type="password"], .ejabat input[type="email"]{
 width:100%;
 }
 /* Invalid input */
