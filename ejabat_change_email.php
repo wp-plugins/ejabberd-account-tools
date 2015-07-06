@@ -43,7 +43,7 @@ function ejabat_change_email_shortcode() {
 	$response = '<div id="response" class="ejabat-display-none"></div>';
 	//Link to change email	
 	if(isset($_GET['code'])) {
-		//Verify transient
+		//Get transient
 		$code = $_GET['code'];
 		//Transient valid
 		if(true == ($data = get_transient('ejabat_email_'.$code))) {
@@ -152,7 +152,7 @@ function ajax_ejabat_change_email_callback() {
 						set_transient('ejabat_email_'.$code, $data, get_option('ejabat_change_email_timeout', 900));
 						//Email data
 						$subject  = sprintf(__('Confirm the email address for your %s account', 'ejabat'), $host);
-						$body = sprintf(__('Hey %s,'."\n\n".'You have changed the private email address for your XMPP account %s. To complete the change, please click on the confirmation link:'."\n\n".'%s'."\n\n".'If you haven\'t made this change, simply disregard this email.'."\n\n".'Greetings,'."\n".'%s', 'ejabat'), $login, $login.'@'.$host, '<'.get_bloginfo('wpurl').$_POST['_wp_http_referer'].'?code='.$code.'>', get_option('ejabat_sender_name', get_bloginfo()));
+						$body = sprintf(__('Hey %s,'."\n\n".'You have changed the private email address for your XMPP account %s. To complete the change, please click on the confirmation link:'."\n\n".'%s'."\n\n".'If you haven\'t made this change, simply disregard this email.'."\n\n".'Greetings,'."\n".'%s', 'ejabat'), $login, $login.'@'.$host, '<'.explode('?', get_bloginfo('wpurl').$_POST['_wp_http_referer'])[0].'?code='.$code.'>', get_option('ejabat_sender_name', get_bloginfo()));
 						$headers[] = 'From: '.get_option('ejabat_sender_name', get_bloginfo()).' <'.get_option('ejabat_sender_email', get_option('admin_email')).'>';
 						//Try send email
 						if(wp_mail($login.' <'.$email.'>', $subject, $body, $headers)) {
