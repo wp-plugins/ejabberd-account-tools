@@ -30,7 +30,7 @@ License: GPLv3
 	along with GNU Radio. If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Translate plugin meta-data
+//Translate plugin metadata
 __('http://beherit.pl/en/wordpress/plugins/ejabberd-account-tools', 'ejabat');
 __('Provide ejabberd account tools such as registration form, deleting an account, resetting account password.', 'ejabat');
 
@@ -60,5 +60,8 @@ include_once dirname(__FILE__).'/ejabat_functions.php';
 //Include register shortcode
 include_once dirname(__FILE__).'/ejabat_register.php';
 
-//Include reset email shortcode
+//Include change email shortcode
 include_once dirname(__FILE__).'/ejabat_change_email.php';
+
+//Include reset password shortcode
+include_once dirname(__FILE__).'/ejabat_reset_password.php';

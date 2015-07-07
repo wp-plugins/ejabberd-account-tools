@@ -38,6 +38,7 @@ function ejabat_register_settings() {
 	register_setting('ejabat_settings', 'ejabat_watcher');
 	register_setting('ejabat_settings', 'ejabat_registration_timeout');
 	register_setting('ejabat_settings', 'ejabat_change_email_timeout');
+	register_setting('ejabat_settings', 'ejabat_reset_password_timeout');
 	//Add link to the settings on plugins page
 	add_filter('plugin_action_links', 'ejabat_plugin_action_links', 10, 2);
 }
@@ -125,6 +126,15 @@ function ejabat_add_meta_boxes() {
 		'ejabat_changing_email_meta_box',
 		__('Changing email', 'ejabat'),
 		'ejabat_changing_email_meta_box',
+		$ejabat_options_page_hook,
+		'normal',
+		'default'
+	);
+	//Add resetting password meta box
+	add_meta_box(
+		'ejabat_resetting_email_meta_box',
+		__('Resetting password', 'ejabat'),
+		'ejabat_resetting_email_meta_box',
 		$ejabat_options_page_hook,
 		'normal',
 		'default'
@@ -226,6 +236,15 @@ function ejabat_changing_email_meta_box() { ?>
 	</ul>
 <?php }
 
+function ejabat_resetting_email_meta_box() { ?>
+	<ul>
+		<li>
+			<label for="ejabat_reset_password_timeout"><?php _e('Confirmation link expiration', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_reset_password_timeout" id="ejabat_reset_password_timeout" value="<?php echo get_option('ejabat_reset_password_timeout', 900); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
+			</br><small><?php _e('Determines expiration time of the each confirmation link. To disable this limitation enter 0.', 'ejabat'); ?></small>
+		</li>
+	</ul>
+<?php }
+
 //Donate meta box
 function ejabat_donate_meta_box() { ?>
 	<p><?php _e('If you like this plugin, please send a donation to support its development and maintenance', 'ejabat'); ?></p>
@@ -245,6 +264,7 @@ function ejabat_usage_meta_box() { ?>
       - "::FFFF:<?php echo $_SERVER['SERVER_ADDR']; ?>"
     access_commands:
       bot:
+        - change_password
         - check_account
         - check_password
         - private_get
