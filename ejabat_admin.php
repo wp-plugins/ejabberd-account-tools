@@ -277,7 +277,8 @@ function ejabat_usage_meta_box() { ?>
 	<p><?php _e('Second, configure REST API url and optional authorization data. At last, place shortcode on page.', 'ejabat'); ?></p>
 	<ul>
 		<li><b>[ejabat_register]</b></br><?php _e('Registration form with validation and reCAPTCHA.', 'ejabat'); ?></br></li>
-		<li><b>[ejabat_change_email]</b></br><?php _e('Form to change / add the private email address.', 'ejabat'); ?></br></li>
+		<li><b>[ejabat_change_email]</b></br><?php _e('Form to changing / adding the private email address.', 'ejabat'); ?></br></li>
+		<li><b>[ejabat_reset_password]</b></br><?php _e('Form to resetting the account password.', 'ejabat'); ?></br></li>
 	</ul>
 <?php }
 
