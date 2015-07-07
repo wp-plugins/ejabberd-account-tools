@@ -92,7 +92,7 @@ function ejabat_change_email_shortcode() {
 		'.$recaptcha_html.'
 		<span id="recaptcha" class="recaptcha tip"></span>
 		<div id="submit">
-			<input type="hidden" name="action" value="ejabat_change_email" />
+			<input type="hidden" name="action" value="ejabat_change_email">
 			'.wp_nonce_field('ajax_ejabat_change_email', '_ejabat_nonce', true, false).'
 			<input type="submit" value="'.__('Change email', 'ejabat').'" id="ejabat_change_email_button">
 			<i id="spinner" style="visibility: hidden;" class="fa fa-spinner fa-pulse"></i>
