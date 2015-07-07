@@ -24,8 +24,8 @@ function ejabat_enqueue_change_email_scripts() {
 	if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'ejabat_change_email')) {
 		wp_enqueue_style('ejabat', plugin_dir_url(__FILE__).'css/style.css', array(), EJABAT_VERSION, 'all');
 		wp_enqueue_style('fontawesome', plugin_dir_url(__FILE__).'css/font-awesome.min.css', array(), '4.3.0', 'all');
-		wp_enqueue_script('ejabat-change_email-valid', plugin_dir_url(__FILE__).'js/jquery.ejabat.change-email.validation.min.js', array('jquery'), EJABAT_VERSION, true);
-		wp_localize_script('ejabat-change_email-valid', 'ejabat', array(
+		wp_enqueue_script('ejabat-change_email', plugin_dir_url(__FILE__).'js/jquery.ejabat.change-email.min.js', array('jquery'), EJABAT_VERSION, true);
+		wp_localize_script('ejabat-change_email', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),
 			'checking_email' => sprintf(__('%s Checking email address...', 'ejabat'), '<i class="fa fa-spinner fa-pulse"></i>'),
 			'invalid_email' => __('Email address seems invalid.', 'ejabat'),
@@ -41,7 +41,7 @@ add_action('wp_enqueue_scripts', 'ejabat_enqueue_change_email_scripts');
 function ejabat_change_email_shortcode() {
 	//Default response
 	$response = '<div id="response" class="ejabat-display-none"></div>';
-	//Link to change email	
+	//Link to change email
 	if(isset($_GET['code'])) {
 		//Get transient
 		$code = $_GET['code'];
