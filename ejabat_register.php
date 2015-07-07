@@ -41,7 +41,7 @@ function ejabat_enqueue_register_scripts() {
 			wp_localize_script('ejabat-hints', 'ejabat_hints', array(
 				'login' => $hints['login'],
 				'password' => $hints['password'],
-				'email' => $hints['email'],
+				'email' => $hints['email']
 			));
 		}
 		wp_enqueue_script('ejabat-register', plugin_dir_url(__FILE__).'js/jquery.ejabat.register.min.js', array('jquery'), EJABAT_VERSION, true);
@@ -72,12 +72,12 @@ function ejabat_register_shortcode() {
 	//Get recaptcha
 	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Create form
-	$html = '<form id="ejabat_register" class="ejabat hints" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
-		<div id="login">
+	$html = '<form id="ejabat_register" class="ejabat" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
+		<div id="login" class="hints">
 			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</div>
-		<div id="password">
+		<div id="password" class="hints">
 			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</div>
@@ -85,7 +85,7 @@ function ejabat_register_shortcode() {
 			<input type="password" name="password_retyped" placeholder="'.__('Confirm password', 'ejabat').'">
 			<span class="tip"></span>
 		</div>
-		<div id="email">
+		<div id="email" class="hints">
 			<input type="email" name="email" placeholder="'.__('Private email', 'ejabat').'">
 			<span class="tip"></span>
 		</div>

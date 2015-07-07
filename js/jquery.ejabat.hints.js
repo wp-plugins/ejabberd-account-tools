@@ -36,24 +36,24 @@ jQuery(document).ready(function($) {
 		$('.' + _hintPos).removeClass(_hintPos).addClass(hintPos);
 	});
 	//Login hint
-	$('.hints #login input').on('focusin', function() {
+	$('#login.hints input').on('focusin', function() {
 		$('#login').addClass('hint--always hint--info ' + hintPos).attr('data-hint', ejabat_hints.login);
 	});
-	$('.hints #login input').on('focusout', function() {
-		$('#login').removeAttr('class').removeAttr('data-hint');
+	$('#login.hints input').on('focusout', function() {
+		$('#login').removeAttr('class').addClass('hints').removeAttr('data-hint');
 	});
 	//Password hint
-	$('#password input').on('focusin', function() {
+	$('#password.hints input').on('focusin', function() {
 		$('#password').addClass('hint--always hint--info ' + hintPos).attr('data-hint', ejabat_hints.password);
 	});
-	$('#password input').on('focusout', function() {
-		$('#password').removeAttr('class').removeAttr('data-hint');
+	$('#password.hints input').on('focusout', function() {
+		$('#password').removeAttr('class').addClass('hints').removeAttr('data-hint');
 	});
 	//Email hint
-	$('#email input').on('focusin', function() {
+	$('#email.hints input').on('focusin', function() {
 		$('#email').addClass('hint--always hint--info ' + hintPos).attr('data-hint', ejabat_hints.email);
 	});
-	$('#email input').on('focusout', function() {
-		$('#email').removeAttr('class').removeAttr('data-hint');
+	$('#email.hints input').on('focusout', function() {
+		$('#email').removeAttr('class').addClass('hints').removeAttr('data-hint');
 	});
 });

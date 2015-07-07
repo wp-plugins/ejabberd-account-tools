@@ -37,9 +37,7 @@ function ejabat_enqueue_reset_password_scripts() {
 		if($show_hints) {
 			wp_enqueue_script('ejabat-hints', plugin_dir_url(__FILE__).'js/jquery.ejabat.hints.min.js', array('jquery'), EJABAT_VERSION, true);
 			wp_localize_script('ejabat-hints', 'ejabat_hints', array(
-				'login' => $hints['login'],
-				'password' => $hints['password'],
-				'email' => $hints['email'],
+				'password' => $hints['password']
 			));
 		}
 		wp_enqueue_script('ejabat-reset_password', plugin_dir_url(__FILE__).'js/jquery.ejabat.reset-password.min.js', array('jquery'), EJABAT_VERSION, true);
@@ -74,12 +72,12 @@ function ejabat_reset_password_shortcode() {
 			$login = $data['login'];
 			$host =  $data['host'];
 			//Create form
-			$html = '<form id="ejabat_change_password" class="ejabat hints" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
+			$html = '<form id="ejabat_change_password" class="ejabat" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
 				<div id="login">
 					<input type="text" name="login" value="'.$login.'@'.$host.'" disabled="disabled">
 					<span class="tip"></span>
 				</div>
-				<div id="password">
+				<div id="password" class="hints">
 					<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
 					<span class="tip"></span>
 				</div>
