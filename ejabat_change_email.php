@@ -146,24 +146,36 @@ function ajax_ejabat_change_email_callback() {
 					}
 					//Login and password valid
 					else if($message=='0') {
-						//Set transient
-						$code = bin2hex(openssl_random_pseudo_bytes(16));
-						$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'host' => $host, 'email' => $email);
-						set_transient('ejabat_email_'.$code, $data, get_option('ejabat_change_email_timeout', 900));
-						//Email data
-						$subject  = sprintf(__('Confirm the email address for your %s account', 'ejabat'), $host);
-						$body = sprintf(__('Hey %s,'."\n\n".'You have changed the private email address for your XMPP account %s. To complete the change, please click on the confirmation link:'."\n\n".'%s'."\n\n".'If you haven\'t made this change, simply disregard this email.'."\n\n".'Greetings,'."\n".'%s', 'ejabat'), $login, $login.'@'.$host, '<'.explode('?', get_bloginfo('wpurl').$_POST['_wp_http_referer'])[0].'?code='.$code.'>', get_option('ejabat_sender_name', get_bloginfo()));
-						$headers[] = 'From: '.get_option('ejabat_sender_name', get_bloginfo()).' <'.get_option('ejabat_sender_email', get_option('admin_email')).'>';
-						//Try send email
-						if(wp_mail($login.' <'.$email.'>', $subject, $body, $headers)) {
-							$status = 'success';
-							$message = __('An email has been sent to you to confirm changes. It contains a confirmation link that you have to click.', 'ejabat');
+						//Get current private email address
+						$message = ejabat_xmpp_post_data('private_get "'.$login.'" "'.$host.'" private email');
+						preg_match("/<private xmlns='email'>(.*)?<\/private>/", $message, $matches);
+						$current_email = $matches[1];
+						//New email address different from current
+						if($email!=$old_email) {
+							//Set transient
+							$code = bin2hex(openssl_random_pseudo_bytes(16));
+							$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'host' => $host, 'email' => $email);
+							set_transient('ejabat_email_'.$code, $data, get_option('ejabat_change_email_timeout', 900));
+							//Email data
+							$subject  = sprintf(__('Confirm the email address for your %s account', 'ejabat'), $host);
+							$body = sprintf(__('Hey %s,'."\n\n".'You have changed the private email address for your XMPP account %s. To complete the change, please click on the confirmation link:'."\n\n".'%s'."\n\n".'If you haven\'t made this change, simply disregard this email.'."\n\n".'Greetings,'."\n".'%s', 'ejabat'), $login, $login.'@'.$host, '<'.explode('?', get_bloginfo('wpurl').$_POST['_wp_http_referer'])[0].'?code='.$code.'>', get_option('ejabat_sender_name', get_bloginfo()));
+							$headers[] = 'From: '.get_option('ejabat_sender_name', get_bloginfo()).' <'.get_option('ejabat_sender_email', get_option('admin_email')).'>';
+							//Try send email
+							if(wp_mail($login.' <'.$email.'>', $subject, $body, $headers)) {
+								$status = 'success';
+								$message = __('An email has been sent to you to confirm changes. It contains a confirmation link that you have to click.', 'ejabat');
+							}
+							//Problem with sending email
+							else {
+								delete_transient('ejabat_email_'.$code);
+								$status = 'error';
+								$message = __('Failed to send email, try again.', 'ejabat');
+							}
 						}
-						//Problem with sending email
+						//New private email address same as current
 						else {
-							delete_transient('ejabat_email_'.$code);
-							$status = 'error';
-							$message = __('Failed to send email, try again.', 'ejabat');
+							$status = 'blocked';
+							$message = __('Selected private email address is already set to this account.', 'ejabat');
 						}
 					}
 					//Unexpected error

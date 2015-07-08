@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ejabberd Account Tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 21:28+0200\n"
-"PO-Revision-Date: 2015-07-07 21:31+0200\n"
+"POT-Creation-Date: 2015-07-08 17:38+0200\n"
+"PO-Revision-Date: 2015-07-08 17:41+0200\n"
 "Last-Translator: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -274,7 +274,7 @@ msgstr ""
 "Prywatny adres e-mail, dla Twojego konta XMPP %s, został pomyślnie zmieniony "
 "na %s."
 
-#: ejabat_change_email.php:67 ejabat_change_email.php:172
+#: ejabat_change_email.php:67 ejabat_change_email.php:184
 #: ejabat_register.php:195 ejabat_register.php:246
 #: ejabat_reset_password.php:201 ejabat_reset_password.php:207
 #: ejabat_reset_password.php:264
@@ -327,12 +327,12 @@ msgstr "Podany adres e-mail jest niepoprawny, zmień go i spróbuj ponownie."
 msgid "Invalid login or password, correct them and try again."
 msgstr "Nieprawidłowy login lub hasło, popraw pola i spróbuj ponownie."
 
-#: ejabat_change_email.php:154
+#: ejabat_change_email.php:160
 #, php-format
 msgid "Confirm the email address for your %s account"
 msgstr "Potwierdź adres e-mail dla Twojego konta %s"
 
-#: ejabat_change_email.php:155
+#: ejabat_change_email.php:161
 #, php-format
 msgid ""
 "Hey %s,\n"
@@ -359,7 +359,7 @@ msgstr ""
 "Pozdrowienia,\n"
 "%s"
 
-#: ejabat_change_email.php:160
+#: ejabat_change_email.php:166
 msgid ""
 "An email has been sent to you to confirm changes. It contains a confirmation "
 "link that you have to click."
@@ -367,9 +367,13 @@ msgstr ""
 "Został wysłany do Ciebie e-mail, aby potwierdzić zmiany. Zawiera link "
 "potwierdzający, w który należy kliknąć."
 
-#: ejabat_change_email.php:166 ejabat_reset_password.php:190
+#: ejabat_change_email.php:172 ejabat_reset_password.php:190
 msgid "Failed to send email, try again."
 msgstr "Nie udało się wysłać wiadomości e-mail, spróbuj ponownie."
+
+#: ejabat_change_email.php:178
+msgid "Selected private email address is already set to this account."
+msgstr "Wybrany prywatny adres e-mail jest już ustawiony do tego konta."
 
 #: ejabat_register.php:51
 #, php-format
