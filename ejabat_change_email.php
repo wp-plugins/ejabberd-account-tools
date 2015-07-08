@@ -151,7 +151,7 @@ function ajax_ejabat_change_email_callback() {
 						preg_match("/<private xmlns='email'>(.*)?<\/private>/", $message, $matches);
 						$current_email = $matches[1];
 						//New email address different from current
-						if($email!=$old_email) {
+						if($email!=$current_email) {
 							//Set transient
 							$code = bin2hex(openssl_random_pseudo_bytes(16));
 							$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'host' => $host, 'email' => $email);
