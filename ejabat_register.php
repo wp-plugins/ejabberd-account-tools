@@ -143,7 +143,7 @@ function ajax_ejabat_register_callback() {
 					else {
 						//Verify registration timeout
 						$ip = $_SERVER['REMOTE_ADDR'];
-						if(get_transient('ejabat_'.$ip)) {
+						if(get_transient('ejabat_register_'.$ip)) {
 							$status = 'blocked';
 							$message = __('You can\'t register another account so quickly. Please try again later.', 'ejabat');
 						}
@@ -173,7 +173,6 @@ function ajax_ejabat_register_callback() {
 									ejabat_xmpp_post_data('set_last "'.$login.'" "'.$host.'" "'.$now.'" "Registered"');
 									//Set private email
 									ejabat_xmpp_post_data('private_set "'.$login.'" "'.$host.'" "<private xmlns=\'email\'>'.$email.'</private>"');
-									//TODO: Send welcome message
 									//Registration watcher
 									if(get_option('ejabat_watcher')) {
 										ejabat_xmpp_post_data('send_message chat "'.$host.'" "'.get_option('ejabat_watcher').'" "Registration watcher" "['.date_i18n('Y-m-d G:i:s', $now + get_option('gmt_offset') * 3600).'] The account '.$login.'@'.$host.' was registered from IP address '.$ip.' by using web registration form."');
@@ -181,7 +180,7 @@ function ajax_ejabat_register_callback() {
 									//Set registration timeout
 									if(get_option('ejabat_registration_timeout', 3600)) {
 										$data = array('timestamp' => $now, 'login' => $login, 'email' => $email);
-										set_transient('ejabat_'.$ip, $data, get_option('ejabat_registration_timeout', 3600));
+										set_transient('ejabat_register_'.$ip, $data, get_option('ejabat_registration_timeout', 3600));
 									}
 								}
 								//Already registered
