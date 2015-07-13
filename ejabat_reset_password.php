@@ -159,7 +159,7 @@ function ajax_ejabat_reset_password_callback() {
 				}
 				//User found
 				else if($message=='0') {
-					//Get private email
+					//Get private email address
 					$message = ejabat_xmpp_post_data('private_get "'.$login.'" "'.$host.'" private email');
 					//Server unavailable
 					if(is_null($message)) {
@@ -181,7 +181,7 @@ function ajax_ejabat_reset_password_callback() {
 						//Try send email
 						if(wp_mail($login.' <'.$email.'>', $subject, $body, $headers)) {
 							$status = 'success';
-							$message = __('An email has been sent to you to confirm changes. It contains a link to a page where you can reset your password.', 'ejabat');
+							$message = sprintf(__('An email has been sent to you at address %s. It contains a link to a page where you can reset your password.', 'ejabat'), mask_email($email));
 						}
 						//Problem with sending email
 						else {

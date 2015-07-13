@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ejabberd Account Tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-08 17:38+0200\n"
-"PO-Revision-Date: 2015-07-08 17:41+0200\n"
+"POT-Creation-Date: 2015-07-13 18:32+0200\n"
+"PO-Revision-Date: 2015-07-13 18:32+0200\n"
 "Last-Translator: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -517,12 +517,13 @@ msgstr ""
 "%s"
 
 #: ejabat_reset_password.php:184
+#, php-format
 msgid ""
-"An email has been sent to you to confirm changes. It contains a link to a "
-"page where you can reset your password."
+"An email has been sent to you at address %s. It contains a link to a page "
+"where you can reset your password."
 msgstr ""
-"Został wysłany do Ciebie e-mail, aby potwierdzić zmiany. Zawiera link do "
-"strony, gdzie można zresetować hasło."
+"Został wysłany do Ciebie e-mail na adres %s. Zawiera link do strony, gdzie "
+"można zresetować hasło."
 
 #: ejabat_reset_password.php:196
 msgid ""

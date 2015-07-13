@@ -86,3 +86,14 @@ function ajax_ejabat_validate_email_mxrecord() {
 }
 add_action('wp_ajax_ejabat_validate_email', 'ajax_ejabat_validate_email_mxrecord');
 add_action('wp_ajax_nopriv_ejabat_validate_email', 'ajax_ejabat_validate_email_mxrecord');
+
+//Masking email address
+function mask_email($email, $mask = '*', $percent = 80)
+{
+	list($user, $domain) = explode('@', $email);
+	$len = strlen($user);
+	$mask_count = floor($len * $percent / 100);
+	$offset = floor(($len - $mask_count) / 2 );
+	$masked = substr($user, 0, $offset).str_repeat($mask, $mask_count).substr($user, $mask_count + $offset);
+	return($masked.'@'.$domain);
+}
