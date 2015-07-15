@@ -164,26 +164,26 @@ add_action('add_meta_boxes', 'ejabat_add_meta_boxes');
 function ejabat_general_meta_box() { ?>
 	<ul>
 		<li>
-			<label for="ejabat_hostname"><?php _e('Default hostname', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_hostname" id="ejabat_hostname" value="<?php echo get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
+			<label for="ejabat_hostname"><?php _e('Default hostname', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_hostname" value="<?php echo get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])); ?>" /></label>
 			</br><small><?php _e('Determines XMPP vhost name which will be default used in all forms.', 'ejabat'); ?></small>
 		</li>
 		<li>
-			<label for="ejabat_sender_email"><?php _e('Sender email address', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_email" id="ejabat_sender_email" value="<?php echo get_option('ejabat_sender_email', get_option('admin_email')); ?>" /></label>
-			</br><label for="ejabat_sender_name"><?php _e('Sender name', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_name" id="ejabat_sender_name" value="<?php echo get_option('ejabat_sender_name', get_bloginfo()); ?>" /></label>
+			<label for="ejabat_sender_email"><?php _e('Sender email address', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_email" value="<?php echo get_option('ejabat_sender_email', get_option('admin_email')); ?>" /></label>
+			</br><label for="ejabat_sender_name"><?php _e('Sender name', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_sender_name" value="<?php echo get_option('ejabat_sender_name', get_bloginfo()); ?>" /></label>
 			</br><small><?php _e('It will be used in all email notification, eg. when resetting password or confirming new private email address.', 'ejabat'); ?></small>
 		</li>
 		<li>
-			<label for="ejabat_show_hints"><input type="checkbox" id="ejabat_show_hints" name="ejabat_show_hints" value="1" <?php echo checked(1, get_option('ejabat_show_hints', true), true ); ?> /><?php _e('Show information hints on forms', 'ejabat'); ?></label>
+			<label for="ejabat_show_hints"><input type="checkbox" name="ejabat_show_hints" value="1" <?php echo checked(1, get_option('ejabat_show_hints', true), true ); ?> /><?php _e('Show information hints on forms', 'ejabat'); ?></label>
 			</br><small><?php printf(__('To support multi-language use %s filter.', 'ejabat'), 'ejabat_hints_args'); ?></small>
 		</li>
 		<li>
-			<label for="ejabat_login_hint"><?php _e('Login', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_login_hint" id="ejabat_login_hint" value="<?php echo get_option('ejabat_login_hint', __('At least 3 and up to 32 characters, only letters and numbers', 'ejabat')); ?>" /></label>
+			<label for="ejabat_login_hint"><?php _e('Login', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_login_hint" value="<?php echo get_option('ejabat_login_hint', __('At least 3 and up to 32 characters, only letters and numbers', 'ejabat')); ?>" /></label>
 		</li>
 		<li>
-			<label for="ejabat_password_hint"><?php _e('Password', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_password_hint" id="ejabat_password_hint" value="<?php echo get_option('ejabat_password_hint', __('Required at least good password', 'ejabat')); ?>" /></label>
+			<label for="ejabat_password_hint"><?php _e('Password', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_password_hint" value="<?php echo get_option('ejabat_password_hint', __('Required at least good password', 'ejabat')); ?>" /></label>
 		</li>
 		<li>
-			<label for="ejabat_email_hint"><?php _e('Email', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_email_hint" id="ejabat_email_hint" value="<?php echo get_option('ejabat_email_hint', __('Required only for password recovery', 'ejabat')); ?>" /></label>
+			<label for="ejabat_email_hint"><?php _e('Email', 'ejabat'); ?>:&nbsp;<input type="text" size="50" style="max-width:100%;" name="ejabat_email_hint" value="<?php echo get_option('ejabat_email_hint', __('Required only for password recovery', 'ejabat')); ?>" /></label>
 		</li>
 	</ul>
 <?php }
@@ -192,18 +192,18 @@ function ejabat_general_meta_box() { ?>
 function ejabat_rest_api_meta_box() { ?>
 	<ul>
 		<li>
-			<label for="ejabat_rest_url"><?php _e('REST API url', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_rest_url" id="ejabat_rest_url" value="<?php echo get_option('ejabat_rest_url'); ?>" /></label>
+			<label for="ejabat_rest_url"><?php _e('REST API url', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_rest_url" value="<?php echo get_option('ejabat_rest_url'); ?>" /></label>
 			</br><small><?php _e('URL defined in module mod_rest in ejabberd settings.', 'ejabat'); ?></small>
 		</li>
 		<li>
-			<label for="ejabat_auth"><input type="checkbox" id="ejabat_auth" name="ejabat_auth" value="1" <?php echo checked(1, get_option('ejabat_auth'), false ); ?> /><?php _e('Enable authorization', 'ejabat'); ?></label>
+			<label for="ejabat_auth"><input type="checkbox" name="ejabat_auth" value="1" <?php echo checked(1, get_option('ejabat_auth'), false ); ?> /><?php _e('Enable authorization', 'ejabat'); ?></label>
 		</li>
 		<li>
-			<label for="ejabat_login"><?php _e('Login', 'ejabat'); ?>:&nbsp;<input type="text" size="25" style="max-width:100%;" name="ejabat_login" id="ejabat_login" value="<?php echo get_option('ejabat_login'); ?>" /></label>
-			</br><label for="ejabat_password"><?php _e('Password', 'ejabat'); ?>:&nbsp;<input type="password" size="25" style="max-width:100%;" name="ejabat_password" id="ejabat_password" value="<?php echo get_option('ejabat_password'); ?>" /></label>
+			<label for="ejabat_login"><?php _e('Login', 'ejabat'); ?>:&nbsp;<input type="text" size="25" style="max-width:100%;" name="ejabat_login" value="<?php echo get_option('ejabat_login'); ?>" /></label>
+			</br><label for="ejabat_password"><?php _e('Password', 'ejabat'); ?>:&nbsp;<input type="password" size="25" style="max-width:100%;" name="ejabat_password" value="<?php echo get_option('ejabat_password'); ?>" /></label>
 		</li>
 		<li>
-			<label for="ejabat_set_last"><input type="checkbox" id="ejabat_set_last" name="ejabat_set_last" value="1" <?php echo checked(1, get_option('ejabat_set_last'), false ); ?> /><?php _e('Set last activity information', 'ejabat'); ?></label>
+			<label for="ejabat_set_last"><input type="checkbox" name="ejabat_set_last" value="1" <?php echo checked(1, get_option('ejabat_set_last'), false ); ?> /><?php _e('Set last activity information', 'ejabat'); ?></label>
 		</li>
 	</ul>
 <?php }
@@ -211,17 +211,17 @@ function ejabat_rest_api_meta_box() { ?>
 function ejabat_registration_meta_box() { ?>
 	<ul>
 		<li>
-			<label for="ejabat_allowed_login_regexp"><?php _e('Regexp for allowed login', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_allowed_login_regexp" id="ejabat_allowed_login_regexp" value="<?php echo get_option('ejabat_allowed_login_regexp', '^[a-z0-9_.-]{3,32}$'); ?>" /></label>
+			<label for="ejabat_allowed_login_regexp"><?php _e('Regexp for allowed login', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_allowed_login_regexp" value="<?php echo get_option('ejabat_allowed_login_regexp', '^[a-z0-9_.-]{3,32}$'); ?>" /></label>
 		</li>
 		<li>
-			<label for="ejabat_blocked_login_regexp"><?php _e('Regexp for blocked login', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_blocked_login_regexp" id="ejabat_blocked_login_regexp" value="<?php echo get_option('ejabat_blocked_login_regexp', '^(.*(admin|blog|bot|contact|e-mail|ejabberd|email|ftp|hostmaster|http|https|imap|info|jabber|login|mail|office|owner|pop3|postmaster|root|smtp|ssh|support|team|webmaster|xmpp).*)$'); ?>" /></label>
+			<label for="ejabat_blocked_login_regexp"><?php _e('Regexp for blocked login', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_blocked_login_regexp" value="<?php echo get_option('ejabat_blocked_login_regexp', '^(.*(admin|blog|bot|contact|e-mail|ejabberd|email|ftp|hostmaster|http|https|imap|info|jabber|login|mail|office|owner|pop3|postmaster|root|smtp|ssh|support|team|webmaster|xmpp).*)$'); ?>" /></label>
 		</li>
 		<li>
-			<label for="ejabat_watcher"><?php _e('Registration watcher', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_watcher" id="ejabat_watcher" value="<?php echo get_option('ejabat_watcher'); ?>" /></label>
+			<label for="ejabat_watcher"><?php _e('Registration watcher', 'ejabat'); ?>:&nbsp;<input type="text" size="40" style="max-width:100%;" name="ejabat_watcher" value="<?php echo get_option('ejabat_watcher'); ?>" /></label>
 			</br><small><?php _e('Sends information about new registration to specified JID. Leave field empty if disabled.', 'ejabat'); ?></small>
 		</li>
 		<li>
-			<label for="ejabat_registration_timeout"><?php _e('Registration timeout', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_registration_timeout" id="ejabat_registration_timeout" value="<?php echo get_option('ejabat_registration_timeout', 3600); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
+			<label for="ejabat_registration_timeout"><?php _e('Registration timeout', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_registration_timeout" value="<?php echo get_option('ejabat_registration_timeout', 3600); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
 			</br><small><?php _e('Limits the frequency of registration from a given IP address. To disable this limitation enter 0.', 'ejabat'); ?></small>
 		</li>
 	</ul>
@@ -230,7 +230,7 @@ function ejabat_registration_meta_box() { ?>
 function ejabat_changing_email_meta_box() { ?>
 	<ul>
 		<li>
-			<label for="ejabat_change_email_timeout"><?php _e('Confirmation link expiration', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_change_email_timeout" id="ejabat_change_email_timeout" value="<?php echo get_option('ejabat_change_email_timeout', 900); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
+			<label for="ejabat_change_email_timeout"><?php _e('Confirmation link expiration', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_change_email_timeout" value="<?php echo get_option('ejabat_change_email_timeout', 900); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
 			</br><small><?php _e('Determines expiration time of the each confirmation link. To disable this limitation enter 0.', 'ejabat'); ?></small>
 		</li>
 	</ul>
@@ -239,7 +239,7 @@ function ejabat_changing_email_meta_box() { ?>
 function ejabat_resetting_email_meta_box() { ?>
 	<ul>
 		<li>
-			<label for="ejabat_reset_password_timeout"><?php _e('Confirmation link expiration', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_reset_password_timeout" id="ejabat_reset_password_timeout" value="<?php echo get_option('ejabat_reset_password_timeout', 900); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
+			<label for="ejabat_reset_password_timeout"><?php _e('Confirmation link expiration', 'ejabat'); ?>:&nbsp;<input type="number" size="5" style="max-width:100%;" name="ejabat_reset_password_timeout" value="<?php echo get_option('ejabat_reset_password_timeout', 900); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
 			</br><small><?php _e('Determines expiration time of the each confirmation link. To disable this limitation enter 0.', 'ejabat'); ?></small>
 		</li>
 	</ul>
