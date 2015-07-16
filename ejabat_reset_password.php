@@ -178,7 +178,7 @@ function ajax_ejabat_reset_password_callback() {
 						if($count < get_option('ejabat_reset_pass_limit_count', 4)) {
 							//Set verification limit transient
 							$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'count' => $count + 1);
-							set_transient('ejabat_pass_'.$login.'@'.$host, $data, get_option('ejabat_reset_pass_limit_timeout', 86400));
+							set_transient('ejabat_pass_'.$login.'@'.$host, $data, get_option('ejabat_reset_pass_limit_timeout', 43200));
 							//Get email address
 							$email = $matches[1];
 							//Set code transient

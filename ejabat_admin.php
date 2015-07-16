@@ -245,7 +245,7 @@ function ejabat_resetting_email_meta_box() { ?>
 			</br><small><?php _e('Determines expiration time of the each confirmation link. To disable this limitation enter 0.', 'ejabat'); ?></small>
 		</li>
 		<li>
-			<label for="ejabat_reset_pass_limit_count"><?php _e('Limit verification to', 'ejabat'); ?>&nbsp;<input type="number" min="3" max="9" style="width: 3em;" name="ejabat_reset_pass_limit_count" value="<?php echo get_option('ejabat_reset_pass_limit_count', 4); ?>" />&nbsp;<?php _e('within', 'ejabat'); ?>&nbsp;<input type="number" min="0" max="86400" style="width: 5em;" name="ejabat_reset_pass_limit_timeout" value="<?php echo get_option('ejabat_reset_pass_limit_timeout', 86400); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
+			<label for="ejabat_reset_pass_limit_count"><?php _e('Limit verification to', 'ejabat'); ?>&nbsp;<input type="number" min="3" max="9" style="width: 3em;" name="ejabat_reset_pass_limit_count" value="<?php echo get_option('ejabat_reset_pass_limit_count', 4); ?>" />&nbsp;<?php _e('within', 'ejabat'); ?>&nbsp;<input type="number" min="0" max="86400" style="width: 5em;" name="ejabat_reset_pass_limit_timeout" value="<?php echo get_option('ejabat_reset_pass_limit_timeout', 43200); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
 			</br><small><?php _e('Determines the maximum number of verification within the specified time. To disable this limitation enter 0.', 'ejabat'); ?></small>
 		</li>
 	</ul>
