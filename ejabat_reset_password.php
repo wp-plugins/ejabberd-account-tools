@@ -64,9 +64,9 @@ function ejabat_reset_password_shortcode() {
 	$response = '<div id="response" class="ejabat-display-none"></div>';
 	//Link to reset password
 	if(isset($_GET['code'])) {
-		//Get transient
+		//Get code transient
 		$code = $_GET['code'];
-		//Transient valid
+		//Code valid
 		if(true == ($data = get_transient('ejabat_pass_'.$code))) {
 			//Get data
 			$login = $data['login'];
@@ -96,9 +96,11 @@ function ejabat_reset_password_shortcode() {
 			</form>';
 			return $html;
 		}
-		//Transient expired or not valid
+		//Code expired or not valid
 		else {
+			//Delete transient
 			delete_transient('ejabat_pass_'.$code);
+			//Response with error
 			$response = '<div id="response" class="ejabat-display-none ejabat-form-blocked" style="display: inline-block;">'.__('The link to reset password has expired or is not valid. Please fill the form and submit it again.', 'ejabat').'</div>';
 		}
 	}
@@ -168,26 +170,43 @@ function ajax_ejabat_reset_password_callback() {
 					}
 					//Private email set
 					else if(preg_match("/<private xmlns='email'>(.*)?<\/private>/", $message, $matches)) {
-						//Get email address
-						$email = $matches[1];
-						//Set transient
-						$code = bin2hex(openssl_random_pseudo_bytes(16));
-						$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'host' => $host, 'email' => $email);
-						set_transient('ejabat_pass_'.$code, $data, get_option('ejabat_reset_password_timeout', 900));
-						//Email data
-						$subject  = sprintf(__('Password reset for your %s account', 'ejabat'), $host);
-						$body = sprintf(__('Hey %s,'."\n\n".'Someone requested to change the password for your XMPP account %s. To complete the change, please click the following link:'."\n\n".'%s'."\n\n".'If you haven\'t made this change, simply disregard this email.'."\n\n".'Greetings,'."\n".'%s', 'ejabat'), $login, $login.'@'.$host, '<'.explode('?', get_bloginfo('wpurl').$_POST['_wp_http_referer'])[0].'?code='.$code.'>', get_option('ejabat_sender_name', get_bloginfo()));
-						$headers[] = 'From: '.get_option('ejabat_sender_name', get_bloginfo()).' <'.get_option('ejabat_sender_email', get_option('admin_email')).'>';
-						//Try send email
-						if(wp_mail($login.' <'.$email.'>', $subject, $body, $headers)) {
-							$status = 'success';
-							$message = sprintf(__('An email has been sent to you at address %s. It contains a link to a page where you can reset your password.', 'ejabat'), mask_email($email));
+						//Check verification limit transient
+						if(true == ($data = get_transient('ejabat_pass_'.$login.'@'.$host))) {
+							$count = $data['count'];
 						}
-						//Problem with sending email
+						//Verification limit is not exceeded
+						if($count < get_option('ejabat_reset_pass_limit_count', 4)) {
+							//Set verification limit transient
+							$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'count' => $count + 1);
+							set_transient('ejabat_pass_'.$login.'@'.$host, $data, get_option('ejabat_reset_pass_limit_timeout', 86400));
+							//Get email address
+							$email = $matches[1];
+							//Set code transient
+							$code = bin2hex(openssl_random_pseudo_bytes(16));
+							$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'host' => $host, 'email' => $email);
+							set_transient('ejabat_pass_'.$code, $data, get_option('ejabat_reset_pass_timeout', 900));
+							//Email data
+							$subject  = sprintf(__('Password reset for your %s account', 'ejabat'), $host);
+							$body = sprintf(__('Hey %s,'."\n\n".'Someone requested to change the password for your XMPP account %s. To complete the change, please click the following link:'."\n\n".'%s'."\n\n".'If you haven\'t made this change, simply disregard this email.'."\n\n".'Greetings,'."\n".'%s', 'ejabat'), $login, $login.'@'.$host, '<'.explode('?', get_bloginfo('wpurl').$_POST['_wp_http_referer'])[0].'?code='.$code.'>', get_option('ejabat_sender_name', get_bloginfo()));
+							$headers[] = 'From: '.get_option('ejabat_sender_name', get_bloginfo()).' <'.get_option('ejabat_sender_email', get_option('admin_email')).'>';
+							//Try send email
+							if(wp_mail($login.' <'.$email.'>', $subject, $body, $headers)) {
+								$status = 'success';
+								$message = sprintf(__('An email has been sent to you at address %s. It contains a link to a page where you can reset your password.', 'ejabat'), mask_email($email));
+							}
+							//Problem with sending email
+							else {
+								//Delete code transient
+								delete_transient('ejabat_pass_'.$code);
+								//Error message
+								$status = 'error';
+								$message = __('Failed to send email, try again.', 'ejabat');
+							}
+						}
+						//Verification limit exceeded
 						else {
-							delete_transient('ejabat_email_'.$code);
 							$status = 'error';
-							$message = __('Failed to send email, try again.', 'ejabat');
+							$message = __('Verification limit has been exceeded. Please try again later.', 'ejabat');
 						}
 					}
 					//Private email not set
@@ -238,9 +257,9 @@ function ajax_ejabat_change_password_callback() {
 				$message = __('Passwords don\'t match, correct them and try again.', 'ejabat');
 			}
 			else {
-				//Get transient
+				//Get code transient
 				$code = $_POST['code'];
-				//Transient valid
+				//Code valid
 				if(true == ($data = get_transient('ejabat_pass_'.$code))) {
 					//Get data
 					$login = $data['login'];
@@ -254,7 +273,10 @@ function ajax_ejabat_change_password_callback() {
 					}
 					//Password changed
 					else if($message=='0') {
+						//Delete all transients
+						delete_transient('ejabat_pass_'.$login.'@'.$host);
 						delete_transient('ejabat_pass_'.$code);
+						//Success message
 						$status = 'success';
 						$message = __('The password for your account was successfully changed.', 'ejabat');
 					}
@@ -264,9 +286,11 @@ function ajax_ejabat_change_password_callback() {
 						$message = __('Unexpected error occurred, try again.', 'ejabat');
 					}
 				}
-				//Transient expired or not valid
+				//Code expired or not valid
 				else {
+					//Delete transient
 					delete_transient('ejabat_pass_'.$code);
+					//Error message
 					$status = 'error';
 					$message = __('The link to reset password has expired or is not valid.', 'ejabat');
 				}
