@@ -106,13 +106,13 @@ function ejabat_register_shortcode() {
 function ajax_ejabat_register_callback() {
 	//Verify nonce
 	if(!isset($_POST['_ejabat_nonce']) || !wp_verify_nonce($_POST['_ejabat_nonce'], 'ajax_ejabat_register') || !check_ajax_referer('ajax_ejabat_register', '_ejabat_nonce', false)) {
-		$status = 'error';
+		$status = 'blocked';
 		$message = __('Verification error, try again.', 'ejabat');
 	}
 	else {
 		//Verify fields
 		if(empty($_POST['login']) || empty($_POST['password']) || empty($_POST['password_retyped']) || empty($_POST['email'])) {
-			$status = 'error';
+			$status = 'blocked';
 			$message = __('All fields are required. Please check the form and submit it again.', 'ejabat');
 		}
 		else {
@@ -152,7 +152,7 @@ function ajax_ejabat_register_callback() {
 							$password = stripslashes_deep($_POST['password']);
 							$password_retyped = stripslashes_deep($_POST['password_retyped']);
 							if($password != $password_retyped) {
-								$status = 'error';
+								$status = 'blocked';
 								$message = __('Passwords don\'t match, correct them and try again.', 'ejabat');
 							}
 							//Try register account
@@ -236,7 +236,7 @@ function ajax_ejabat_register_check_login() {
 		}
 		//Login already registered
 		else if($message=='0') {
-			$status = 'error';
+			$status = 'blocked';
 			$message = __('Selected login is already registered.', 'ejabat');
 		}
 		//Unexpected error

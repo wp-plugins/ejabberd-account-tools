@@ -24,8 +24,8 @@ function ejabat_enqueue_change_email_scripts() {
 	if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'ejabat_change_email')) {
 		wp_enqueue_style('ejabat', plugin_dir_url(__FILE__).'css/style.css', array(), EJABAT_VERSION, 'all');
 		wp_enqueue_style('fontawesome', plugin_dir_url(__FILE__).'css/font-awesome.min.css', array(), '4.3.0', 'all');
-		wp_enqueue_script('ejabat-change_email', plugin_dir_url(__FILE__).'js/jquery.ejabat.change-email.min.js', array('jquery'), EJABAT_VERSION, true);
-		wp_localize_script('ejabat-change_email', 'ejabat', array(
+		wp_enqueue_script('ejabat-change-email', plugin_dir_url(__FILE__).'js/jquery.ejabat.change-email.min.js', array('jquery'), EJABAT_VERSION, true);
+		wp_localize_script('ejabat-change-email', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),
 			'checking_email' => sprintf(__('%s Checking email address...', 'ejabat'), '<i class="fa fa-spinner fa-pulse"></i>'),
 			'invalid_email' => __('Email address seems invalid.', 'ejabat'),
@@ -43,9 +43,9 @@ function ejabat_change_email_shortcode() {
 	$response = '<div id="response" class="ejabat-display-none"></div>';
 	//Link to change email
 	if(isset($_GET['code'])) {
-		//Get transient
+		//Get code transient
 		$code = $_GET['code'];
-		//Transient valid
+		//Code valid
 		if(true == ($data = get_transient('ejabat_email_'.$code))) {
 			//Get data
 			$login = $data['login'];
@@ -67,7 +67,7 @@ function ejabat_change_email_shortcode() {
 				$response = '<div id="response" class="ejabat-display-none ejabat-form-error" style="display: inline-block;">'.__('Unexpected error occurred, try again.', 'ejabat').'</div>';
 			}
 		}
-		//Transient expired or not valid
+		//Code expired or not valid
 		else {
 			delete_transient('ejabat_email_'.$code);
 			$response = '<div id="response" class="ejabat-display-none ejabat-form-blocked" style="display: inline-block;">'.__('The link to change private email address has expired or is not valid. Please fill the form and submit it again.', 'ejabat').'</div>';
@@ -106,13 +106,13 @@ function ejabat_change_email_shortcode() {
 function ajax_ejabat_change_email_callback() {
 	//Verify nonce
 	if(!isset($_POST['_ejabat_nonce']) || !wp_verify_nonce($_POST['_ejabat_nonce'], 'ajax_ejabat_change_email') || !check_ajax_referer('ajax_ejabat_change_email', '_ejabat_nonce', false)) {
-		$status = 'error';
+		$status = 'blocked';
 		$message = __('Verification error, try again.', 'ejabat');
 	}
 	else {
 		//Verify fields
 		if(empty($_POST['login']) || empty($_POST['password']) || empty($_POST['email'])) {
-			$status = 'error';
+			$status = 'blocked';
 			$message = __('All fields are required. Please check the form and submit it again.', 'ejabat');
 		}
 		else {
@@ -141,7 +141,7 @@ function ajax_ejabat_change_email_callback() {
 					}
 					//Invalid login or password
 					else if($message=='1') {
-						$status = 'error';
+						$status = 'blocked';
 						$message = __('Invalid login or password, correct them and try again.', 'ejabat');
 					}
 					//Login and password valid
@@ -152,7 +152,7 @@ function ajax_ejabat_change_email_callback() {
 						$current_email = $matches[1];
 						//New email address different from current
 						if($email!=$current_email) {
-							//Set transient
+							//Set code transient
 							$code = bin2hex(openssl_random_pseudo_bytes(16));
 							$data = array('timestamp' => current_time('timestamp', 1), 'ip' => $_SERVER['REMOTE_ADDR'], 'login' => $login, 'host' => $host, 'email' => $email);
 							set_transient('ejabat_email_'.$code, $data, get_option('ejabat_change_email_timeout', 900));

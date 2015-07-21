@@ -57,7 +57,7 @@ color:#f00;
 /* Password strength */
 input.very-weak{
 background:linear-gradient(90deg, #FFA0A0 25%, #FFF 25%) !important;
-border-color:#F04040 !important
+border-color:#F04040 !important;
 }
 input.weak{
 background:linear-gradient(90deg, #FFB78C 50%, #FFF 50%) !important;
@@ -76,20 +76,23 @@ font-size:14px;
 }
 /* Response */
 #response{
-margin:1.5em 0.5em 0;
-padding:0.2em 1em;
+margin-top:1.5em;
+padding:1em 1.5em;
 }
 div.ejabat-form-success {
-border:2px solid #398f14;
+border:1px solid #D6E9C6;
+background-color:#DFF0D8;
+color:#3C763D;
 }
 div.ejabat-form-error {
-border:2px solid #ff0000;
+border:1px solid #EBCCD1;
+background-color:#F2DEDE;
+color:#A94442;
 }
 div.ejabat-form-blocked {
-border:2px solid #ffa500;
-}
-div.ejabat-validation-errors {
-border:2px solid #f7e700;
+border:1px solid #F7E700;
+background-color:#FCF8E3;
+color:#8A6D3B;
 }
 div.ejabat-display-none{
 display:none;

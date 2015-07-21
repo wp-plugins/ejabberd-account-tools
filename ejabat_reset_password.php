@@ -40,8 +40,8 @@ function ejabat_enqueue_reset_password_scripts() {
 				'password' => $hints['password']
 			));
 		}
-		wp_enqueue_script('ejabat-reset_password', plugin_dir_url(__FILE__).'js/jquery.ejabat.reset-password.min.js', array('jquery'), EJABAT_VERSION, true);
-		wp_localize_script('ejabat-reset_password', 'ejabat', array(
+		wp_enqueue_script('ejabat-reset-password', plugin_dir_url(__FILE__).'js/jquery.ejabat.reset-password.min.js', array('jquery'), EJABAT_VERSION, true);
+		wp_localize_script('ejabat-reset-password', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),
 			'password_very_weak' => __('Password is very weak.', 'ejabat'),
 			'password_weak' => __('Password is weak.', 'ejabat'),
@@ -129,13 +129,13 @@ function ejabat_reset_password_shortcode() {
 function ajax_ejabat_reset_password_callback() {
 	//Verify nonce
 	if(!isset($_POST['_ejabat_nonce']) || !wp_verify_nonce($_POST['_ejabat_nonce'], 'ajax_ejabat_reset_password') || !check_ajax_referer('ajax_ejabat_reset_password', '_ejabat_nonce', false)) {
-		$status = 'error';
+		$status = 'blocked';
 		$message = __('Verification error, try again.', 'ejabat');
 	}
 	else {
 		//Verify fields
 		if(empty($_POST['login'])) {
-			$status = 'error';
+			$status = 'blocked';
 			$message = __('All fields are required. Please check the form and submit it again.', 'ejabat');
 		}
 		else {
@@ -156,7 +156,7 @@ function ajax_ejabat_reset_password_callback() {
 				}
 				//User not found
 				else if($message=='1') {
-					$status = 'error';
+					$status = 'blocked';
 					$message = __('Invalid login, correct it and try again.', 'ejabat');
 				}
 				//User found
@@ -205,7 +205,7 @@ function ajax_ejabat_reset_password_callback() {
 						}
 						//Verification limit exceeded
 						else {
-							$status = 'error';
+							$status = 'blocked';
 							$message = __('Verification limit has been exceeded. Please try again later.', 'ejabat');
 						}
 					}
@@ -239,13 +239,13 @@ add_action('wp_ajax_nopriv_ejabat_reset_password', 'ajax_ejabat_reset_password_c
 function ajax_ejabat_change_password_callback() {
 	//Verify nonce
 	if(!isset($_POST['code']) || !isset($_POST['_ejabat_nonce']) || !wp_verify_nonce($_POST['_ejabat_nonce'], 'ajax_ejabat_reset_password') || !check_ajax_referer('ajax_ejabat_reset_password', '_ejabat_nonce', false)) {
-		$status = 'error';
+		$status = 'blocked';
 		$message = __('Verification error, try again.', 'ejabat');
 	}
 	else {
 		//Verify fields
 		if(empty($_POST['password']) || empty($_POST['password_retyped'])) {
-			$status = 'error';
+			$status = 'blocked';
 			$message = __('All fields are required. Please check the form and submit it again.', 'ejabat');
 		}
 		else {
@@ -253,7 +253,7 @@ function ajax_ejabat_change_password_callback() {
 			$password = stripslashes_deep($_POST['password']);
 			$password_retyped = stripslashes_deep($_POST['password_retyped']);
 			if($password != $password_retyped) {
-				$status = 'error';
+				$status = 'blocked';
 				$message = __('Passwords don\'t match, correct them and try again.', 'ejabat');
 			}
 			else {
@@ -291,7 +291,7 @@ function ajax_ejabat_change_password_callback() {
 					//Delete transient
 					delete_transient('ejabat_pass_'.$code);
 					//Error message
-					$status = 'error';
+					$status = 'blocked';
 					$message = __('The link to reset password has expired or is not valid.', 'ejabat');
 				}
 			}

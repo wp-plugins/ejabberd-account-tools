@@ -237,7 +237,6 @@ jQuery(document).ready(function($) {
 	$("#ejabat_register").submit(function() {
 		//Remove response message
 		$('#response').css('display', '');
-		$('#response').removeClass('ejabat-validation-errors');
 		$('#response').removeClass('ejabat-form-blocked');
 		$('#response').removeClass('ejabat-form-error');
 		$('#response').removeClass('ejabat-form-success');
@@ -282,7 +281,7 @@ jQuery(document).ready(function($) {
 			}
 			//Add error response message
 			$('#response').css('display', 'inline-block');
-			$('#response').addClass('ejabat-validation-errors');
+			$('#response').addClass('ejabat-form-blocked');
 			$('#response').html(ejabat.empty_fields);
 			//Hide spinner
 			$('#spinner').css('visibility', 'hidden');
