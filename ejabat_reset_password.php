@@ -50,7 +50,7 @@ function ejabat_enqueue_reset_password_scripts() {
 			'passwords_mismatch' => __('Password mismatch with the confirmation.', 'ejabat'),
 			'recaptcha_verify' => __('Please verify the Captcha.', 'ejabat'),
 			'empty_field' => __('Please fill the required field.', 'ejabat'),
-			'empty_fields' => __('Validation errors occurred. Please check all fields and submit it again.', 'ejabat')
+			'empty_fields' => __('Verification errors occurred. Please check all fields and submit it again.', 'ejabat')
 		));
 		wp_enqueue_script('zxcvbn-async');
 		wp_enqueue_script('password-strength-meter');
@@ -62,6 +62,8 @@ add_action('wp_enqueue_scripts', 'ejabat_enqueue_reset_password_scripts');
 function ejabat_reset_password_shortcode() {
 	//Default response
 	$response = '<div id="response" class="ejabat-display-none"></div>';
+	//Get recaptcha
+	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Link to reset password
 	if(isset($_GET['code'])) {
 		//Get code transient
@@ -85,6 +87,8 @@ function ejabat_reset_password_shortcode() {
 					<input type="password" name="password_retyped" placeholder="'.__('Confirm password', 'ejabat').'">
 					<span class="tip"></span>
 				</div>
+				'.$recaptcha_html.'
+				<span id="recaptcha" class="recaptcha tip"></span>
 				<div id="submit">
 					<input type="hidden" name="action" value="ejabat_change_password">
 					<input type="hidden" name="code" value="'.$code.'">
@@ -104,8 +108,6 @@ function ejabat_reset_password_shortcode() {
 			$response = '<div id="response" class="ejabat-display-none ejabat-form-blocked" style="display: inline-block;">'.__('The link to reset password has expired or is not valid. Please fill the form and submit it again.', 'ejabat').'</div>';
 		}
 	}
-	//Get recaptcha
-	$recaptcha_html = apply_filters('recaptcha_html','');
 	//Create form
 	$html = '<form id="ejabat_reset_password" class="ejabat" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
 		<div id="login">
@@ -249,50 +251,58 @@ function ajax_ejabat_change_password_callback() {
 			$message = __('All fields are required. Please check the form and submit it again.', 'ejabat');
 		}
 		else {
-			//Verify passwords
-			$password = stripslashes_deep($_POST['password']);
-			$password_retyped = stripslashes_deep($_POST['password_retyped']);
-			if($password != $password_retyped) {
+			//Verify recaptcha
+			$recaptcha_valid = apply_filters('recaptcha_valid', null);
+			if(!recaptcha_valid) {
 				$status = 'blocked';
-				$message = __('Passwords don\'t match, correct them and try again.', 'ejabat');
+				$message = __('Captcha validation error, try again.', 'ejabat');
 			}
 			else {
-				//Get code transient
-				$code = $_POST['code'];
-				//Code valid
-				if(true == ($data = get_transient('ejabat_pass_'.$code))) {
-					//Get data
-					$login = $data['login'];
-					$host =  $data['host'];
-					//Try set new password
-					$message = ejabat_xmpp_post_data('change_password "'.$login.'" "'.$host.'" "'.$password.'"');
-					//Server unavailable
-					if(is_null($message)) {
-						$status = 'error';
-						$message = __('Server is temporarily unavailable.', 'ejabat');
-					}
-					//Password changed
-					else if($message=='0') {
-						//Delete all transients
-						delete_transient('ejabat_pass_'.$login.'@'.$host);
-						delete_transient('ejabat_pass_'.$code);
-						//Success message
-						$status = 'success';
-						$message = __('The password for your account was successfully changed.', 'ejabat');
-					}
-					//Unexpected error
-					else {
-						$status = 'error';
-						$message = __('Unexpected error occurred, try again.', 'ejabat');
-					}
-				}
-				//Code expired or not valid
-				else {
-					//Delete transient
-					delete_transient('ejabat_pass_'.$code);
-					//Error message
+				//Verify passwords
+				$password = stripslashes_deep($_POST['password']);
+				$password_retyped = stripslashes_deep($_POST['password_retyped']);
+				if($password != $password_retyped) {
 					$status = 'blocked';
-					$message = __('The link to reset password has expired or is not valid.', 'ejabat');
+					$message = __('Passwords don\'t match, correct them and try again.', 'ejabat');
+				}
+				else {
+					//Get code transient
+					$code = $_POST['code'];
+					//Code valid
+					if(true == ($data = get_transient('ejabat_pass_'.$code))) {
+						//Get data
+						$login = $data['login'];
+						$host =  $data['host'];
+						//Try set new password
+						$message = ejabat_xmpp_post_data('change_password "'.$login.'" "'.$host.'" "'.$password.'"');
+						//Server unavailable
+						if(is_null($message)) {
+							$status = 'error';
+							$message = __('Server is temporarily unavailable.', 'ejabat');
+						}
+						//Password changed
+						else if($message=='0') {
+							//Delete all transients
+							delete_transient('ejabat_pass_'.$login.'@'.$host);
+							delete_transient('ejabat_pass_'.$code);
+							//Success message
+							$status = 'success';
+							$message = __('The password for your account was successfully changed.', 'ejabat');
+						}
+						//Unexpected error
+						else {
+							$status = 'error';
+							$message = __('Unexpected error occurred, try again.', 'ejabat');
+						}
+					}
+					//Code expired or not valid
+					else {
+						//Delete transient
+						delete_transient('ejabat_pass_'.$code);
+						//Error message
+						$status = 'blocked';
+						$message = __('The link to reset password has expired or is not valid.', 'ejabat');
+					}
 				}
 			}
 		}

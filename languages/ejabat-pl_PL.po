@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ejabberd Account Tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 12:40+0200\n"
-"PO-Revision-Date: 2015-07-16 12:40+0200\n"
+"POT-Creation-Date: 2015-07-22 20:42+0200\n"
+"PO-Revision-Date: 2015-07-22 20:42+0200\n"
 "Last-Translator: Krzysztof Grochocki <kontakt@beherit.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: ejabat_admin.php:62 ejabat_admin.php:298
+#: ejabat_admin.php:62 ejabat_admin.php:299
 msgid "Ejabberd Account Tools"
 msgstr "Ejabberd Account Tools"
 
@@ -105,7 +105,8 @@ msgid "To support multi-language use %s filter."
 msgstr "Do obsługi wielu języków użyj filtra %s."
 
 #: ejabat_admin.php:182 ejabat_admin.php:204 ejabat_change_email.php:81
-#: ejabat_register.php:77 ejabat_reset_password.php:112
+#: ejabat_delete_account.php:90 ejabat_register.php:77
+#: ejabat_reset_password.php:114
 msgid "Login"
 msgstr "Login"
 
@@ -113,7 +114,8 @@ msgstr "Login"
 msgid "At least 3 and up to 32 characters, only letters and numbers"
 msgstr "Co najmniej 3 i maksymalnie 32 znaków, tylko litery i cyfry"
 
-#: ejabat_admin.php:185 ejabat_admin.php:205
+#: ejabat_admin.php:185 ejabat_admin.php:205 ejabat_delete_account.php:94
+#: ejabat_register.php:81
 msgid "Password"
 msgstr "Hasło"
 
@@ -226,7 +228,7 @@ msgstr ""
 "Po pierwsze, upewnij się, że moduł mod_rest w ejabberd jest poprawnie "
 "skonfigurowany. Przykładowa konfiguracja:"
 
-#: ejabat_admin.php:283
+#: ejabat_admin.php:284
 msgid ""
 "Second, configure REST API url and optional authorization data. At last, "
 "place shortcode on page."
@@ -234,19 +236,19 @@ msgstr ""
 "Po drugie, skonfiguruj adres REST API i opcjonalne dane autoryzacji. W "
 "końcu, umieścić shortcode na stronie."
 
-#: ejabat_admin.php:285
+#: ejabat_admin.php:286
 msgid "Registration form with validation and reCAPTCHA."
 msgstr "Formularz rejestracji z walidacją i reCAPTCHA."
 
-#: ejabat_admin.php:286
+#: ejabat_admin.php:287
 msgid "Form to changing / adding the private email address."
 msgstr "Formularz do zmiany / dodania prywatnego adresu e-mail."
 
-#: ejabat_admin.php:287
+#: ejabat_admin.php:288
 msgid "Form to resetting the account password."
 msgstr "Formularz do resetowania hasła dla konta."
 
-#: ejabat_admin.php:306
+#: ejabat_admin.php:307
 msgid "Save settings"
 msgstr "Zapisz zmiany"
 
@@ -259,25 +261,26 @@ msgstr "%s Sprawdzanie adresu e-mail..."
 msgid "Email address seems invalid."
 msgstr "Podany adres e-mail jest niepoprawny."
 
-#: ejabat_change_email.php:32 ejabat_register.php:60
-#: ejabat_reset_password.php:51
+#: ejabat_change_email.php:32 ejabat_delete_account.php:31
+#: ejabat_register.php:60 ejabat_reset_password.php:51
 msgid "Please verify the Captcha."
 msgstr "Proszę zweryfikować Captcha."
 
-#: ejabat_change_email.php:33 ejabat_register.php:61
-#: ejabat_reset_password.php:52
+#: ejabat_change_email.php:33 ejabat_delete_account.php:32
+#: ejabat_register.php:61 ejabat_reset_password.php:52
 msgid "Please fill the required field."
 msgstr "Proszę uzupełnić wymagane pole."
 
-#: ejabat_change_email.php:34 ejabat_register.php:62
-#: ejabat_reset_password.php:53
+#: ejabat_change_email.php:34 ejabat_delete_account.php:33
+#: ejabat_register.php:62 ejabat_reset_password.php:53
 msgid ""
-"Validation errors occurred. Please check all fields and submit it again."
+"Verification errors occurred. Please check all fields and submit it again."
 msgstr ""
-"Wystąpiły błędy walidacji. Proszę sprawdzić wszystkie pola i przesłać "
+"Wystąpiły błędy weryfikacji. Proszę sprawdzić wszystkie pola i przesłać "
 "formularz ponownie."
 
 #: ejabat_change_email.php:58 ejabat_change_email.php:140
+#: ejabat_delete_account.php:138 ejabat_delete_account.php:239
 #: ejabat_register.php:165
 msgid "Server is temporarily unavailable, please try again in a moment."
 msgstr "Serwer jest chwilowo niedostępny, spróbuj ponownie za chwilę."
@@ -292,9 +295,11 @@ msgstr ""
 "na %s."
 
 #: ejabat_change_email.php:67 ejabat_change_email.php:184
+#: ejabat_delete_account.php:188 ejabat_delete_account.php:194
+#: ejabat_delete_account.php:266 ejabat_delete_account.php:272
 #: ejabat_register.php:194 ejabat_register.php:245
-#: ejabat_reset_password.php:220 ejabat_reset_password.php:226
-#: ejabat_reset_password.php:286
+#: ejabat_reset_password.php:222 ejabat_reset_password.php:228
+#: ejabat_reset_password.php:295
 msgid "Unexpected error occurred, try again."
 msgstr "Wystąpił nieoczekiwany błąd, spróbuj ponownie."
 
@@ -306,8 +311,8 @@ msgstr ""
 "Link do zmiany prywatnego adresu e-mail wygasł lub nie jest poprawny. Proszę "
 "wypełnić formularz i przesłać go ponownie."
 
-#: ejabat_change_email.php:85 ejabat_register.php:81
-#: ejabat_reset_password.php:81
+#: ejabat_change_email.php:85 ejabat_delete_account.php:62
+#: ejabat_reset_password.php:83
 msgid "Password "
 msgstr "Hasło"
 
@@ -319,20 +324,23 @@ msgstr "Nowy prywatny e-mail"
 msgid "Change email"
 msgstr "Zmień e-mail"
 
-#: ejabat_change_email.php:110 ejabat_register.php:110
-#: ejabat_reset_password.php:133 ejabat_reset_password.php:243
+#: ejabat_change_email.php:110 ejabat_delete_account.php:115
+#: ejabat_delete_account.php:211 ejabat_register.php:110
+#: ejabat_reset_password.php:135 ejabat_reset_password.php:245
 msgid "Verification error, try again."
 msgstr "Błąd weryfikacji, spróbuj ponownie."
 
-#: ejabat_change_email.php:116 ejabat_register.php:116
-#: ejabat_reset_password.php:139 ejabat_reset_password.php:249
+#: ejabat_change_email.php:116 ejabat_delete_account.php:121
+#: ejabat_delete_account.php:217 ejabat_register.php:116
+#: ejabat_reset_password.php:141 ejabat_reset_password.php:251
 msgid "All fields are required. Please check the form and submit it again."
 msgstr ""
 "Wszystkie pola są wymagane. Proszę sprawdzić formularz i przesłać go "
 "ponownie."
 
-#: ejabat_change_email.php:123 ejabat_register.php:123
-#: ejabat_reset_password.php:146
+#: ejabat_change_email.php:123 ejabat_delete_account.php:128
+#: ejabat_delete_account.php:224 ejabat_register.php:123
+#: ejabat_reset_password.php:148 ejabat_reset_password.php:258
 msgid "Captcha validation error, try again."
 msgstr "Błąd walidacji Captcha, spróbuj ponownie."
 
@@ -340,7 +348,8 @@ msgstr "Błąd walidacji Captcha, spróbuj ponownie."
 msgid "Email address seems invalid, change it and try again."
 msgstr "Podany adres e-mail jest niepoprawny, zmień go i spróbuj ponownie."
 
-#: ejabat_change_email.php:145
+#: ejabat_change_email.php:145 ejabat_delete_account.php:143
+#: ejabat_delete_account.php:244
 msgid "Invalid login or password, correct them and try again."
 msgstr "Nieprawidłowy login lub hasło, popraw pola i spróbuj ponownie."
 
@@ -384,13 +393,110 @@ msgstr ""
 "Został wysłany do Ciebie e-mail, aby potwierdzić zmiany. Zawiera link "
 "potwierdzający, w który należy kliknąć."
 
-#: ejabat_change_email.php:172 ejabat_reset_password.php:203
+#: ejabat_change_email.php:172 ejabat_delete_account.php:177
+#: ejabat_reset_password.php:205
 msgid "Failed to send email, try again."
 msgstr "Nie udało się wysłać wiadomości e-mail, spróbuj ponownie."
 
 #: ejabat_change_email.php:178
 msgid "Selected private email address is already set to this account."
 msgstr "Wybrany prywatny adres e-mail jest już ustawiony do tego konta."
+
+#: ejabat_delete_account.php:55
+msgid ""
+"Warning! If you type in here your correct password, your account will be "
+"deleted forever. There is no way to restore account."
+msgstr ""
+"Ostrzeżenie! Jeżeli wpiszesz tutaj swoje prawidłowe hasło, Twoje konto "
+"zostanie usunięte na zawsze! Nie ma sposobu, aby przywrócić konto."
+
+#: ejabat_delete_account.php:71
+msgid "Yes, really delete account"
+msgstr "Tak, naprawdę usuń konto"
+
+#: ejabat_delete_account.php:83
+msgid ""
+"The link to delete account has expired or is not valid. Please fill the form "
+"and submit it again."
+msgstr ""
+"Link do usunięcia konta wygasł lub nie jest poprawny. Proszę wypełnić "
+"formularz i przesłać go ponownie."
+
+#: ejabat_delete_account.php:87
+msgid ""
+"Warning! If you delete your account, it's gone forever. There is no way to "
+"restore account."
+msgstr ""
+"Ostrzeżenie! Jeśli usuniesz swoje konto, to już na zawsze. Nie ma sposobu, "
+"aby przywrócić konto."
+
+#: ejabat_delete_account.php:102
+msgid "Delete account"
+msgstr "Usuń konto"
+
+#: ejabat_delete_account.php:152 ejabat_delete_account.php:253
+#: ejabat_register.php:230 ejabat_reset_password.php:157
+#: ejabat_reset_password.php:171 ejabat_reset_password.php:281
+msgid "Server is temporarily unavailable."
+msgstr "Serwer jest chwilowo niedostępny."
+
+#: ejabat_delete_account.php:163
+#, php-format
+msgid "Delete your account on %s"
+msgstr "Usuń swoje konto na %s"
+
+#: ejabat_delete_account.php:164
+#, php-format
+msgid ""
+"Hey %s,\n"
+"\n"
+"You wanted to delete your XMPP account %s. To complete the change, please "
+"click the following link:\n"
+"\n"
+"%s\n"
+"\n"
+"If you no longer want to delete the account, simply disregard this email.\n"
+"\n"
+"Greetings,\n"
+"%s"
+msgstr ""
+"Hej %s,\n"
+"\n"
+"Chciałeś usunąć swoje konto XMPP %s. Aby dokończyć zmiany, proszę kliknąć w "
+"poniższy link:\n"
+"\n"
+"%s\n"
+"\n"
+"Jeśli jednak nie chcesz usunąć konta, po prostu zignoruj tę wiadomość.\n"
+"\n"
+"Pozdrowienia,\n"
+"%s"
+
+#: ejabat_delete_account.php:169
+#, php-format
+msgid ""
+"An email has been sent to you at address %s. It contains a link to a page "
+"where you can finally delete your account."
+msgstr ""
+"Został wysłany do Ciebie e-mail na adres %s. Zawiera link do strony, gdzie "
+"możesz finalnie usunąć swoje konto."
+
+#: ejabat_delete_account.php:183
+msgid ""
+"Private email address hasn't been set. To delete your account please first "
+"set the private email address or simply delete your account via IM."
+msgstr ""
+"Prywatny adres e-mail nie został ustawiony. Aby usunąć konto należy najpierw "
+"ustawić prywatny adres e-mail lub po prostu usuń swoje konto za "
+"pośrednictwem komunikatora."
+
+#: ejabat_delete_account.php:261
+msgid "Your account has been deleted, goodbye."
+msgstr "Twoje konto zostało usunięte, do widzenia."
+
+#: ejabat_delete_account.php:281
+msgid "The link to delete account has expired or is not valid."
+msgstr "Link do usunięcia konta wygasł lub nie jest poprawny."
 
 #: ejabat_register.php:51
 #, php-format
@@ -421,7 +527,7 @@ msgstr "Hasło jest silne."
 msgid "Password mismatch with the confirmation."
 msgstr "Hasło nie zgadza się z potwierdzeniem."
 
-#: ejabat_register.php:85 ejabat_reset_password.php:85
+#: ejabat_register.php:85 ejabat_reset_password.php:87
 msgid "Confirm password"
 msgstr "Potwierdź hasło"
 
@@ -451,7 +557,7 @@ msgstr ""
 "Nie można zarejestrować kolejnego konta tak szybko. Proszę spróbuj ponownie "
 "później."
 
-#: ejabat_register.php:156 ejabat_reset_password.php:257
+#: ejabat_register.php:156 ejabat_reset_password.php:266
 msgid "Passwords don't match, correct them and try again."
 msgstr "Hasła nie są identyczne, popraw je i spróbuj ponownie."
 
@@ -468,11 +574,6 @@ msgstr "Wybrany login jest już zarejestrowany, zmień go i spróbuj ponownie."
 msgid "Login contains illegal words."
 msgstr "Login zawiera niedozwolone słowa."
 
-#: ejabat_register.php:230 ejabat_reset_password.php:155
-#: ejabat_reset_password.php:169 ejabat_reset_password.php:272
-msgid "Server is temporarily unavailable."
-msgstr "Serwer jest chwilowo niedostępny."
-
 #: ejabat_register.php:235
 msgid "Selected login is available."
 msgstr "Wybrany login jest dostępny."
@@ -481,11 +582,11 @@ msgstr "Wybrany login jest dostępny."
 msgid "Selected login is already registered."
 msgstr "Wybrany login jest już zarejestrowany."
 
-#: ejabat_reset_password.php:92
+#: ejabat_reset_password.php:96
 msgid "Set new password"
 msgstr "Ustaw nowe hasło"
 
-#: ejabat_reset_password.php:104
+#: ejabat_reset_password.php:108
 msgid ""
 "The link to reset password has expired or is not valid. Please fill the form "
 "and submit it again."
@@ -493,20 +594,20 @@ msgstr ""
 "Link do zresetowania hasła wygasł lub nie jest poprawny. Proszę wypełnić "
 "formularz i przesłać go ponownie."
 
-#: ejabat_reset_password.php:120
+#: ejabat_reset_password.php:122
 msgid "Reset password"
 msgstr "Zresetuj hasło"
 
-#: ejabat_reset_password.php:160
+#: ejabat_reset_password.php:162
 msgid "Invalid login, correct it and try again."
 msgstr "Nieprawidłowy login, popraw go i spróbuj ponownie."
 
-#: ejabat_reset_password.php:189
+#: ejabat_reset_password.php:191
 #, php-format
 msgid "Password reset for your %s account"
 msgstr "Resetowanie hasła dla Twojego konta %s"
 
-#: ejabat_reset_password.php:190
+#: ejabat_reset_password.php:192
 #, php-format
 msgid ""
 "Hey %s,\n"
@@ -533,21 +634,21 @@ msgstr ""
 "Pozdrowienia,\n"
 "%s"
 
-#: ejabat_reset_password.php:195
+#: ejabat_reset_password.php:197
 #, php-format
 msgid ""
 "An email has been sent to you at address %s. It contains a link to a page "
 "where you can reset your password."
 msgstr ""
 "Został wysłany do Ciebie e-mail na adres %s. Zawiera link do strony, gdzie "
-"można zresetować hasło."
+"możesz zresetować hasło."
 
-#: ejabat_reset_password.php:209
+#: ejabat_reset_password.php:211
 msgid "Verification limit has been exceeded. Please try again later."
 msgstr ""
 "Limit weryfikacji został przekroczony. Proszę spróbuj ponownie później."
 
-#: ejabat_reset_password.php:215
+#: ejabat_reset_password.php:217
 msgid ""
 "Private email address hasn't been set. To reset your password please contact "
 "with the administrator."
@@ -555,10 +656,10 @@ msgstr ""
 "Prywatny adres e-mail nie został ustawiony. Aby zresetować hasło, skontaktuj "
 "się z administratorem."
 
-#: ejabat_reset_password.php:281
+#: ejabat_reset_password.php:290
 msgid "The password for your account was successfully changed."
 msgstr "Hasło do Twojego konta zostało pomyślnie zmienione."
 
-#: ejabat_reset_password.php:295
+#: ejabat_reset_password.php:304
 msgid "The link to reset password has expired or is not valid."
 msgstr "Link do zresetowania hasła wygasł lub nie jest poprawny."

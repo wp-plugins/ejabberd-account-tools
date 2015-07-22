@@ -31,7 +31,7 @@ function ejabat_enqueue_change_email_scripts() {
 			'invalid_email' => __('Email address seems invalid.', 'ejabat'),
 			'recaptcha_verify' => __('Please verify the Captcha.', 'ejabat'),
 			'empty_field' => __('Please fill the required field.', 'ejabat'),
-			'empty_fields' => __('Validation errors occurred. Please check all fields and submit it again.', 'ejabat')
+			'empty_fields' => __('Verification errors occurred. Please check all fields and submit it again.', 'ejabat')
 		));
 	}
 }
@@ -133,7 +133,7 @@ function ajax_ejabat_change_email_callback() {
 					//Check login and password
 					list($login, $host) = array_pad(explode('@', stripslashes_deep($_POST['login']), 2), 2, get_option('ejabat_hostname', preg_replace('/^www\./','',$_SERVER['SERVER_NAME'])));
 					$password = stripslashes_deep($_POST['password']);
-					$message = ejabat_xmpp_post_data('check_password "'.$login.'" "'.$host.'" "'.$password.'"'); //TODO: change to check_password_hash
+					$message = ejabat_xmpp_post_data('check_password "'.$login.'" "'.$host.'" "'.$password.'"');
 					//Server unavailable
 					if(is_null($message)) {
 						$status = 'error';

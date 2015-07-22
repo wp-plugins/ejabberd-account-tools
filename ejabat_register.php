@@ -59,7 +59,7 @@ function ejabat_enqueue_register_scripts() {
 			'invalid_email' => __('Email address seems invalid.', 'ejabat'),
 			'recaptcha_verify' => __('Please verify the Captcha.', 'ejabat'),
 			'empty_field' => __('Please fill the required field.', 'ejabat'),
-			'empty_fields' => __('Validation errors occurred. Please check all fields and submit it again.', 'ejabat')
+			'empty_fields' => __('Verification errors occurred. Please check all fields and submit it again.', 'ejabat')
 		));
 		wp_enqueue_script('zxcvbn-async');
 		wp_enqueue_script('password-strength-meter');
@@ -78,7 +78,7 @@ function ejabat_register_shortcode() {
 			<span class="tip"></span>
 		</div>
 		<div id="password" class="hints">
-			<input type="password" name="password" placeholder="'.__('Password ', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
+			<input type="password" name="password" placeholder="'.__('Password', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
 			<span class="tip"></span>
 		</div>
 		<div id="password_retyped">

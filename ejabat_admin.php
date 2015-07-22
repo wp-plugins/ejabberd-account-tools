@@ -278,6 +278,7 @@ function ejabat_usage_meta_box() { ?>
         - register
         - send_message
         - set_last
+        - unregister
     allowed_destinations: []
     allowed_stanza_types: []</pre>
 	<p><?php _e('Second, configure REST API url and optional authorization data. At last, place shortcode on page.', 'ejabat'); ?></p>

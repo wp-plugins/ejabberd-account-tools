@@ -97,3 +97,9 @@ color:#8A6D3B;
 div.ejabat-display-none{
 display:none;
 }
+/* Information */
+#info{
+display:inline-block;
+margin-bottom:1.5em;
+padding:1em 1.5em;
+}
