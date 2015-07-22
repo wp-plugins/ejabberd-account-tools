@@ -303,6 +303,9 @@ jQuery(document).ready(function($) {
 					$('#response').css('display', 'inline-block');
 					$('#response').addClass('ejabat-form-'+response.status);
 					$('#response').html(response.message);
+					//Reset recaptcha
+					( typeof Recaptcha != 'undefined' && Recaptcha.reload() );
+					( typeof grecaptcha != 'undefined' && grecaptcha.reset() );
 					//Hide spinner
 					$('#spinner').css('visibility', 'hidden');
 				}
