@@ -51,7 +51,7 @@ function ejabat_delete_account_shortcode() {
 			$login = $data['login'];
 			$host =  $data['host'];
 			//Create form
-			$html = '<div id="info" class="ejabat-form-error">'.__('Warning! If you type in here your correct password, your account will be deleted forever. There is no way to restore account.', 'ejabat').'</div>
+			$html = '<div id="info" class="ejabat-form-error">'.__('If you type in here your correct password, your account will be deleted forever. There is no way to restore account.', 'ejabat').'</div>
 			<form id="ejabat_unregister_account" class="ejabat" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
 				<div id="login">
 					<input type="text" name="login" value="'.$login.'@'.$host.'" disabled="disabled">
@@ -83,7 +83,7 @@ function ejabat_delete_account_shortcode() {
 		}
 	}
 	//Create form
-	$html = '<div id="info" class="ejabat-form-error">'.__('Warning! If you delete your account, it\'s gone forever. There is no way to restore account.', 'ejabat').'</div>
+	$html = '<div id="info" class="ejabat-form-error">'.__('If you delete your account, it\'s gone forever. There is no way to restore account.', 'ejabat').'</div>
 	<form id="ejabat_delete_account" class="ejabat" method="post" novalidate="novalidate" autocomplete="off" onsubmit="return false">
 		<div id="login">
 			<input type="text" name="login" placeholder="'.__('Login', 'ejabat').'" readonly="readonly" onfocus="this.removeAttribute(\'readonly\');">
