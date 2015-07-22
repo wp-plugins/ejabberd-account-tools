@@ -18,7 +18,7 @@
 	along with GNU Radio. If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Enqueue style & scripts
+//Enqueue styles & scripts
 function ejabat_enqueue_delete_account_scripts() {
 	global $post;
 	if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'ejabat_delete_account')) {
@@ -122,7 +122,7 @@ function ajax_ejabat_delete_account_callback() {
 		else {
 			//Verify recaptcha
 			$recaptcha_valid = apply_filters('recaptcha_valid', null);
-			if(!recaptcha_valid) {
+			if(!$recaptcha_valid) {
 				$status = 'blocked';
 				$message = __('Captcha validation error, try again.', 'ejabat');
 			}
@@ -218,7 +218,7 @@ function ajax_ejabat_unregister_account_callback() {
 		else {
 			//Verify recaptcha
 			$recaptcha_valid = apply_filters('recaptcha_valid', null);
-			if(!recaptcha_valid) {
+			if(!$recaptcha_valid) {
 				$status = 'blocked';
 				$message = __('Captcha validation error, try again.', 'ejabat');
 			}
