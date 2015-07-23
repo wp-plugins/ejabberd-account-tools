@@ -4,14 +4,14 @@ Tags: xmpp, jabber, ejabberd
 Donate link: http://beherit.pl/en/donations
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Provide ejabberd account tools such as registration form, deleting an account, resetting account password.
+Provide ejabberd account tools such as the registration form, deleting the account, resetting the account password.
 
 == Description ==
-Provide ejabberd account tools such as registration form, deleting an account (will be added soon), resetting account password (will be added soon). The plugin uses REST API (module mod_rest), is useful when the XMPP server is located on another machine. Easy to configure and use - just need to type REST API url and insert shortcuts on the page.
+Provide ejabberd account tools such as the registration form, deleting the account, resetting the account password. The plugin uses REST API (module mod_rest), is useful when the XMPP server is located on another machine. Easy to configure and use - just need to type REST API url and insert shortcuts on the page.
 
 Plugin to work needs to install the [WordPress ReCaptcha Integration](https://wordpress.org/plugins/wp-recaptcha-integration/).
 
@@ -29,6 +29,19 @@ This section describes how to install the plugin and get it working.
 No questions yet.
 
 == Changelog ==
+= 1.3 (2015-07-23) =
+* Added form to resetting the account password.
+* Added form to deleting the account.
+* Removing incorrect parameters from URL added to the emails.
+* Changed the method of adding hints.
+* Checking current private email address before sending message to change it.
+* Repair captcha validation.
+* Changed the form-response box style.
+* Rename scripts files.
+* Translation of the plugin metadata.
+* Updated translations.
+* Minor bugfix and changes.
+
 = 1.2 (2015-06-30) =
 * Added ability to show information hints on forms.
 * Added more data to transients.
@@ -62,14 +75,18 @@ No questions yet.
 * First public version.
 
 == Upgrade Notice ==
-= 1.2 (2015-06-30) =
-* Added ability to show information hints on forms.
-* Added more data to transients.
-* Changes in default blocked logins regexp.
-* Getting the properly default email address.
-* Validating email address by checking MX record.
-* Added vhosts support in changing email.
-* Other minor changes.
+= 1.3 (2015-07-23) =
+* Added form to resetting the account password.
+* Added form to deleting the account.
+* Removing incorrect parameters from URL added to the emails.
+* Changed the method of adding hints.
+* Checking current private email address before sending message to change it.
+* Repair captcha validation.
+* Changed the form-response box style.
+* Rename scripts files.
+* Translation of the plugin metadata.
+* Updated translations.
+* Minor bugfix and changes.
 
 == Other Notes ==
 This plugin is using [HINT.css](https://github.com/chinchang/hint.css) and [Font Awesome](https://fortawesome.github.io/Font-Awesome/).
