@@ -41,6 +41,7 @@ function ejabat_register_settings() {
 	register_setting('ejabat_settings', 'ejabat_reset_pass_timeout');
 	register_setting('ejabat_settings', 'ejabat_reset_pass_limit_count');
 	register_setting('ejabat_settings', 'ejabat_reset_pass_limit_timeout');
+	register_setting('ejabat_settings', 'ejabat_delete_account_timeout');
 	//Add link to the settings on plugins page
 	add_filter('plugin_action_links', 'ejabat_plugin_action_links', 10, 2);
 }
@@ -134,9 +135,18 @@ function ejabat_add_meta_boxes() {
 	);
 	//Add resetting password meta box
 	add_meta_box(
-		'ejabat_resetting_email_meta_box',
+		'ejabat_resetting_password_meta_box',
 		__('Resetting password', 'ejabat'),
-		'ejabat_resetting_email_meta_box',
+		'ejabat_resetting_password_meta_box',
+		$ejabat_options_page_hook,
+		'normal',
+		'default'
+	);
+	//Add deleting account meta box
+	add_meta_box(
+		'ejabat_deleting_account_meta_box',
+		__('Deleting account', 'ejabat'),
+		'ejabat_deleting_account_meta_box',
 		$ejabat_options_page_hook,
 		'normal',
 		'default'
@@ -210,6 +220,7 @@ function ejabat_rest_api_meta_box() { ?>
 	</ul>
 <?php }
 
+//Registration meta box
 function ejabat_registration_meta_box() { ?>
 	<ul>
 		<li>
@@ -229,6 +240,7 @@ function ejabat_registration_meta_box() { ?>
 	</ul>
 <?php }
 
+//Changing email meta box
 function ejabat_changing_email_meta_box() { ?>
 	<ul>
 		<li>
@@ -238,7 +250,8 @@ function ejabat_changing_email_meta_box() { ?>
 	</ul>
 <?php }
 
-function ejabat_resetting_email_meta_box() { ?>
+//Resetting password meta box
+function ejabat_resetting_password_meta_box() { ?>
 	<ul>
 		<li>
 			<label for="ejabat_reset_pass_timeout"><?php _e('Confirmation link expiration', 'ejabat'); ?>:&nbsp;<input type="number" min="0" max="86400" style="width: 5em;" name="ejabat_reset_pass_timeout" value="<?php echo get_option('ejabat_reset_pass_timeout', 900); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
@@ -250,6 +263,17 @@ function ejabat_resetting_email_meta_box() { ?>
 		</li>
 	</ul>
 <?php }
+
+//Deleting account meta box
+function ejabat_deleting_account_meta_box() { ?>
+	<ul>
+		<li>
+			<label for="ejabat_delete_account_timeout"><?php _e('Confirmation link expiration', 'ejabat'); ?>:&nbsp;<input type="number" min="0" max="86400" style="width: 5em;" name="ejabat_delete_account_timeout" value="<?php echo get_option('ejabat_delete_account_timeout', 900); ?>" />&nbsp;<?php _e('seconds', 'ejabat'); ?></label>
+			</br><small><?php _e('Determines expiration time of the each confirmation link. To disable this limitation enter 0.', 'ejabat'); ?></small>
+		</li>
+	</ul>
+<?php }
+
 
 //Donate meta box
 function ejabat_donate_meta_box() { ?>
@@ -283,9 +307,10 @@ function ejabat_usage_meta_box() { ?>
     allowed_stanza_types: []</pre>
 	<p><?php _e('Second, configure REST API url and optional authorization data. At last, place shortcode on page.', 'ejabat'); ?></p>
 	<ul>
-		<li><b>[ejabat_register]</b></br><?php _e('Registration form with validation and reCAPTCHA.', 'ejabat'); ?></br></li>
+		<li><b>[ejabat_register]</b></br><?php _e('Form to register a new account.', 'ejabat'); ?></br></li>
 		<li><b>[ejabat_change_email]</b></br><?php _e('Form to changing / adding the private email address.', 'ejabat'); ?></br></li>
 		<li><b>[ejabat_reset_password]</b></br><?php _e('Form to resetting the account password.', 'ejabat'); ?></br></li>
+		<li><b>[ejabat_delete_account]</b></br><?php _e('Form to deleting the account.', 'ejabat'); ?></br></li>
 	</ul>
 <?php }
 
