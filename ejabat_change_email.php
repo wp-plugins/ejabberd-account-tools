@@ -23,7 +23,7 @@ function ejabat_enqueue_change_email_scripts() {
 	global $post;
 	if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'ejabat_change_email')) {
 		wp_enqueue_style('ejabat', plugin_dir_url(__FILE__).'css/style.css', array(), EJABAT_VERSION, 'all');
-		wp_enqueue_style('fontawesome', plugin_dir_url(__FILE__).'css/font-awesome.min.css', array(), '4.3.0', 'all');
+		wp_enqueue_style('fontawesome', plugin_dir_url(__FILE__).'css/font-awesome.min.css', array(), '4.4.0', 'all');
 		wp_enqueue_script('ejabat-change-email', plugin_dir_url(__FILE__).'js/jquery.ejabat.change-email.min.js', array('jquery'), EJABAT_VERSION, true);
 		wp_localize_script('ejabat-change-email', 'ejabat', array(
 			'ajax_url' => admin_url('admin-ajax.php?lang='.get_locale()),
