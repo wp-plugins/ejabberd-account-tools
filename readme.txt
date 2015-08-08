@@ -3,7 +3,7 @@ Contributors: Beherit
 Tags: xmpp, jabber, ejabberd
 Donate link: http://beherit.pl/en/donations
 Requires at least: 4.0
-Tested up to: 4.2.2
+Tested up to: 4.3
 Stable tag: 1.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -29,6 +29,9 @@ This section describes how to install the plugin and get it working.
 No questions yet.
 
 == Changelog ==
+= 1.x (2015-xx-xx) =
+* Update FontAwesome.
+
 = 1.3 (2015-07-23) =
 * Added form to resetting the account password.
 * Added form to deleting the account.
